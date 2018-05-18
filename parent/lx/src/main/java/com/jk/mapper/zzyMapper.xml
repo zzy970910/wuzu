@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ZzyDao">
+    <resultMap type="com.jk.bean.lx.Indent" id="indent">
+
+        <id column="id" property="id"/>
+        <result column="incode" property="incode"></result>
+        <result column="price" property="price"></result>
+        <result column="createtime" property="createtime"></result>
+        <result column="userid" property="userid"></result>
+        <result column="username" property="username"></result>
+        <result column="stauts" property="stauts"></result>
+
+    </resultMap>
+    <resultMap type="com.jk.bean.lx.Da" id="da">
+
+    <id column="id" property="id"/>
+    <result column="dname" property="dname"></result>
+    <result column="beizhu" property="beizhu"></result>
+
+</resultMap>
+    <resultMap type="com.jk.bean.mn.News" id="n">
+
+        <id column="newsId" property="newsId"/>
+        <result column="newsName" property="newsName"></result>
+        <result column="beizhu" property="beizhu"></result>
+
+    </resultMap>
+
+    <resultMap type="com.jk.bean.lx.Xiao" id="xiao">
+
+        <id column="id" property="id"/>
+        <result column="name" property="name"></result>
+        <result column="dname" property="dname"></result>
+        <result column="beizhu" property="beizhu"></result>
+
+    </resultMap>
+    <resultMap type="com.jk.bean.lx.Goods" id="good">
+
+        <id column="id" property="id"/>
+        <result column="sname" property="sname"></result>
+        <result column="price" property="price"></result>
+        <result column="kucun" property="kucun"></result>
+        <result column="xiaoid" property="xiaoid"></result>
+        <result column="daid" property="daid"></result>
+        <result column="rid" property="rid"></result>
+
+        <result column="tid" property="tid"></result>
+        <result column="pasttime" property="pasttime"></result>
+        <result column="image" property="image"></result>
+    </resultMap>
+    <resultMap id="biao" type="com.jk.bean.ht.Label" >
+        <id column="labelid " property="labelid "  />
+        <result column="labelname" property="labelname"  />
+        <result column="labeladdress" property="labeladdress"  />
+    </resultMap>
+
+    <select id="getDingWhere" resultMap="indent">
+        SELECT * FROM indent WHERE 1=1
+        <if test="incode!=null and incode!=''">
+            and incode =#{incode}
+
+        </if>
+        <if test="username!=null and username!=''">
+            and username like '%${username}%'
+
+        </if>
+    </select>
+    <select id="getDingPage" resultMap="indent">
+        SELECT * FROM indent WHERE 1=1
+        <if test="indent!=null">
+            <if test="indent.incode!=null and indent.incode!='' ">
+                and incode =#{indent.incode}
+            </if>
+            <if test="indent.username!=null and indent.username!='' ">
+                and username =#{indent.username}
+            </if>
+        </if>
+        limit #{begin},#{end}
+    </select>
+    <update id="updateById" parameterType="Integer">
+    UPDATE indent set stauts=1 where id=#{id}
+    </update>
+    <select id="queryDalei" resultMap="da">
+       SELECT * FROM t_shopdalei
+    </select>
+    <select id="queryXiao" resultMap="xiao">
+     SELECT t1.id,t1.name,t1.beizhu,t2.dname from t_shopxiaolei t1
+     LEFT JOIN t_shopdalei t2 on t1.daid
+     =t2.id
+    </select>
+    <select id="getGoodWhere" resultMap="good">
+  SELECT t1.id,t1.sname,t1.price,t1.kucun,t2.dname,t3.name,t1.pasttime,t1.image,t1.rid,t1.tid,t1.zhekou,t1.mid  FROM  t_shop t1 LEFT JOIN t_shopdalei t2 on t1.daid=t2.id
+        LEFT JOIN t_shopxiaolei t3 on t1.xiaoid=t3.id where 1=1
+        <if test="sname!=null and sname!=''">
+            and t1.sname like '%${sname}%'
+
+        </if>
+    </select>
+    <select id="getGoodPage" resultMap="good">
+        SELECT t1.id,t1.sname,t1.price,t1.kucun,t2.dname,t3.name,t1.pasttime,t1.image,t1.rid,t1.tid,t1.zhekou,t1.mid  FROM  t_shop t1 LEFT JOIN t_shopdalei t2 on t1.daid=t2.id
+        LEFT JOIN t_shopxiaolei t3 on t1.xiaoid=t3.id where 1=1
+        <if test="good!=null">
+            <if test="good.sname!=null and good.sname!='' ">
+                and t1.sname like '%${good.sname}%'
+            </if>
+        </if>
+        limit #{begin},#{end}
+    </select>
+    <select id="selectda" resultMap="da">
+        select * from t_shopdalei
+    </select>
+    <select id="selectxiao" resultMap="xiao">
+    select * from t_shopxiaolei
+</select>
+    <select id="selectquanbu" resultMap="good">
+        select * from t_shop
+    </select>
+    <select id="queryXin" resultMap="n">
+        SELECT * FROM t_news
+    </select>
+    <select id="xiangqing" parameterType="Integer" resultType="com.jk.bean.mn.News">
+  SELECT * FROM t_news where newsId =#{id}
+    </select>
+    <select id="querytejia" resultMap="good">
+        SELECT * FROM  t_shop where tid =1
+    </select>
+    <select id="selectFenid" resultMap="good">
+        SELECT * FROM  t_shop where xiaoid =#{id}
+    </select>
+    <select id="querybianqian" resultMap="biao">
+        SELECT * FROM t_label
+    </select>
+    <select id="selectreping" resultMap="good">
+        SELECT * FROM t_shop WHERE rid=1
+    </select>
+    <update id="updateremai" parameterType="Integer">
+    UPDATE t_shop SET rid=1 WHERE id=#{reid}
+</update>
+    <update id="updatetejia" parameterType="Integer">
+        UPDATE t_shop SET tid=1 WHERE id=#{id}
+    </update>
+    <select id="selectxiang" parameterType="Integer" resultType="com.jk.bean.lx.Goods">
+        SELECT * FROM t_shop WHERE id=#{id}
+    </select>
+    <select id="queryShopsById" parameterType="Integer" resultType="com.jk.bean.lx.Goods">
+        SELECT * FROM t_shop WHERE id=#{id}
+    </select>
+</mapper>

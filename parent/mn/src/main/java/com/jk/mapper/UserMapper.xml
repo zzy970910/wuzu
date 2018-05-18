@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.NewsDao" >
+    <!-- 查询总条数-->
+    <select id="queryTotal" resultType="java.lang.Integer" parameterType="com.jk.bean.mn.News">
+        select count(1) FROM t_news WHERE 1=1
+        <if test="newsName!=null and ''!=newsName">
+            and newsName like concat('%',concat(#{newsName},'%'))
+        </if>
+    </select>
+    <!-- 查询-->
+    <select id="queryNews" resultType="com.jk.bean.mn.News">
+        SELECT
+        newsId,
+        newsName,
+        newsTime,
+        newsNeirun
+        FROM t_news WHERE  1=1
+        <if test="news.newsName!=null and ''!=news.newsName">
+            and newsName like concat('%',concat(#{news.newsName},'%'))
+        </if>
+        order by newsTime DESC
+        limit #{pages},#{rows}
+    </select>
+
+    <!-- 新增-->
+    <insert id="addNews">
+          INSERT INTO `wuzu`.`t_news`
+            (
+             newsName,
+             newsTime,
+             newsNeirun)
+VALUES (
+        #{newsName},
+        #{newsTime},
+        #{newsNeirun});
+    </insert>
+    <!-- 删除-->
+    <delete id="deleteNews" >
+      DELETE
+      FROM `wuzu`.`t_news`
+      WHERE `newsId` = #{id};
+    </delete>
+    <!-- 查询新闻根据ID-->
+    <select id="queryNewsById" resultType="com.jk.bean.mn.News">
+     SELECT
+      `newsId`,
+      `newsName`,
+      `newsTime`,
+      `newsNeirun`
+      FROM `wuzu`.`t_news`
+      WHERE `newsId`= #{id}
+    </select>
+    <!-- 修改-->
+    <update id="updateNews">
+        update wuzu.t_news
+            set
+            newsName = #{newsName},
+            newsTime = #{newsTime},
+            newsNeirun = #{newsNeirun}
+        where newsId= #{newsId};
+    </update>
+    <!-- poi-->
+    <select id="queryNewsList" resultType="com.jk.bean.mn.News">
+        select * from t_news
+    </select>
+</mapper>

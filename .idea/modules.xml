@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TeamOne.iml" filepath="$PROJECT_DIR$/TeamOne.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/cjb/cjb.iml" filepath="$PROJECT_DIR$/parent/cjb/cjb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/gkk/gkk.iml" filepath="$PROJECT_DIR$/parent/gkk/gkk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/ht/ht.iml" filepath="$PROJECT_DIR$/parent/ht/ht.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/lx/lx.iml" filepath="$PROJECT_DIR$/parent/lx/lx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/mn/mn.iml" filepath="$PROJECT_DIR$/parent/mn/mn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/parent.iml" filepath="$PROJECT_DIR$/parent/parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/util/util.iml" filepath="$PROJECT_DIR$/util/util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/wb/wb.iml" filepath="$PROJECT_DIR$/parent/wb/wb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webapp/webapp.iml" filepath="$PROJECT_DIR$/webapp/webapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/yq/yq.iml" filepath="$PROJECT_DIR$/parent/yq/yq.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.BatchDao" >
+  <resultMap id="BaseResultMap" type="com.jk.bean.ht.Batch" >
+    <id column="id " property="id " jdbcType="INTEGER" />
+    <result column="bname" property="bname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,bname
+  </sql>
+
+    <select id="batchCount" resultType="long">
+        select count(*)
+        from t_batch
+        <if test="batch.bname != null">
+            and  bname like '%${batch.bname}%'
+        </if>
+    </select>
+
+    <select id="selectbatch" resultType="java.util.Map" parameterType="com.jk.bean.ht.Batch">
+        select * from t_batch where 1=1
+        <if test="bname != null and bname != '' ">
+            and   bname like  #{bname}
+        </if>
+        limit #{start},#{rows}
+    </select>
+
+    <insert id="addBatchList" >
+        insert into t_batch
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="bname != null" >
+                bname,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="bname != null" >
+                #{bname,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+    </insert>
+
+    <delete id="deleteBatch" parameterType="java.lang.Integer">
+        delete from t_batch
+        where id = #{id}
+    </delete>
+
+    <update id="updateBatch" parameterType="com.jk.bean.ht.Batch">
+        update t_batch set bname=#{bname},
+        where id = #{id}
+    </update>
+
+
+</mapper>

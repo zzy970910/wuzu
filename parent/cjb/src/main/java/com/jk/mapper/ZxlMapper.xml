@@ -1,0 +1,57 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!-- namespace 指的是 dao层的接口 -->
+<mapper namespace="com.jk.dao.ZxlDaos">
+  <!--  <resultMap type="com.jk.pojo.Prower" id="pro">
+      <id column="p_id" property="p_id"/>
+      <result column="p_text" property="p_text"></result>
+      <result column="p_url" property="p_url"></result>
+      <result column="p_icon" property="p_icon"></result>
+      <result column="p_parentid" property="p_parentid"></result>
+   </resultMap>
+    -->
+   <select id="queryAllto" resultType="com.jk.pojo.ZxlHouTaiDenglu">
+	   
+		SELECT  * FROM t_houtaidenglu
+
+   </select>
+
+
+    <select id="addqueryAllto" resultType="com.jk.pojo.User">
+
+        SELECT  * FROM t_user WHERE loginname=#{un}
+
+    </select>
+
+    <insert id="addShow" >
+
+        insert into t_user(loginname,userpwd,telphone,birday,username,age)
+        values(#{unss},#{pwdss},#{dianhua},#{xuanz},#{zhenname},${shengfenz})
+    </insert>
+    <select id="querlto" resultType="com.jk.pojo.User">
+
+        SELECT  * FROM t_user
+
+    </select>
+   		 <!-- 教师学生 -->
+	  	   
+	<!--
+
+	
+	<select id="zhucqueryprov" resultType="com.zhangxl.model.quanxian.Roles_tree">	   
+		SELECT   t.* FROM  roles_tree t where rolesid=${shenid}		
+  	</select>
+  		 
+  		 
+  		 <insert id="role_user" >
+	 	insert into roles_tree(treesid,rolesid) values(${flag},${ids})
+		 </insert>
+	 
+	 
+	 <delete id="daletetoRole_User" >
+			DELETE FROM trees WHERE id =${a} 
+	 </delete>
+	  <insert id="appendser" >
+	 	insert into trees(text,url,pid) values(#{jdtext},#{jdurl},#{pid})
+		 </insert>-->
+</mapper>

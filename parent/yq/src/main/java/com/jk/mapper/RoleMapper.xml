@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.RoleDao" >
+
+	<select id="selectCount" resultType="long">
+		select count(1) from t_role
+		<!--select count(1) from t_role where 1=1-->
+		<!--<if test="name != null and name != ''">-->
+			<!--and name like '%${name}%'-->
+		<!--</if>-->
+	</select>
+	<select id="roleList" resultType="com.jk.bean.wyc.Role">
+		select * from t_role limit #{start},#{rows}
+		<!--<if test="name != null and name != ''">-->
+			<!--and name like '%${name}%'-->
+		<!--</if>-->
+	</select>
+	<select id="addchamenulist" resultType="com.jk.bean.wyc.Tree">
+	select * from t_tree
+	</select>
+	
+	<select id="addcharolemenulist" resultType="com.jk.bean.wyc.Tree">
+	select  * from t_tree ,role_tree  where t_tree.id=role_tree.treeId  and  role_tree.roleId=#{roid}
+	</select> 
+	
+	<delete id="roleService">
+	
+	delete  from  role_tree  where role_tree.roleId=#{roid}
+	
+	</delete>
+	<insert id="saverolemenulist">
+	 insert  into  role_tree (roleid,treeid)  values (#{roid},#{parseInt})
+	
+	</insert>
+</mapper>
+

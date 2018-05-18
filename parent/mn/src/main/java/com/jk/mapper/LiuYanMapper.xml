@@ -1,0 +1,20 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.dao.LiuYanDao">
+	<!-- 查询总条数-->
+	<select id="queryTotal" resultType="java.lang.Integer" parameterType="com.jk.bean.mn.LiuYan">
+		select count(1) from t_liuyan ly,t_user u where ly.uid=u.userid
+	</select>
+	<!-- 查询-->
+	<select id="selectsLiuYan" resultType="com.jk.bean.mn.LiuYan">
+		select ly.id,u.loginname,ly.lycontent,ly.lytime,ly.hfcontent,ly.hftime from t_liuyan ly,t_user u where ly.uid=u.userid
+		limit #{pages},#{rows}
+	</select>
+
+	<!-- 删除-->
+	<delete id="deleteLiuYan" >
+		DELETE
+		FROM `wuzu`.`t_liuyan`
+		WHERE `id` = #{id};
+	</delete>
+</mapper>

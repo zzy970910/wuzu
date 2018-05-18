@@ -1,0 +1,83 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.dao.ShopLeiDao">
+	<!-- 新增大类-->
+	<insert id="addDaLei">
+INSERT INTO `wuzu`.`t_shopdalei`
+            (
+             dname,
+             beizhu)
+VALUES (
+        #{dname},
+        #{beizhu});
+	</insert>
+	<!-- 删除 -->
+	<delete id="deleteDaLei" >
+	DELETE
+FROM `wuzu`.`t_shopdalei`
+WHERE id = #{id};
+	</delete>
+	<!-- 查询新闻根据ID-->
+	<select id="queryDaById" resultType="com.jk.bean.lx.Da">
+select
+  `id`,
+  `dname`,
+  `beizhu`
+from `wuzu`.`t_shopdalei`
+ WHERE `id`= #{id}
+	</select>
+	<!-- 修改-->
+	<update id="updateDa">
+		update `wuzu`.`t_shopdalei`
+set
+  dname = #{dname},
+  beizhu= #{beizhu}
+where id = #{id};
+	</update>
+    <!--查询商品大类-->
+    <select id="queryda" resultType="com.jk.bean.lx.Da">
+        SELECT
+          `id`,
+          `dname`
+        FROM `wuzu`.`t_shopdalei`
+</select>
+
+    <!-- 新增小类-->
+    <insert id="addXiaoLei">
+        insert into `wuzu`.`t_shopxiaolei`
+            (
+             `name`,
+             `daid`,
+             `beizhu`)
+values (
+        #{name},
+        #{daid},
+        #{beizhu});
+    </insert>
+    <!-- 删除小类 -->
+    <delete id="deleteXiaoLei" >
+        DELETE
+        FROM `wuzu`.`t_shopxiaolei`
+        WHERE id = #{id};
+    </delete>
+    <!-- 查询新闻根据ID-->
+    <select id="queryXiaoById" resultType="com.jk.bean.lx.Xiao">
+SELECT
+  `id`,
+  `name`,
+  `daid`,
+  `beizhu`
+FROM `wuzu`.`t_shopxiaolei`
+WHERE `id`= #{id}
+    </select>
+<!--修改小类-->
+    <update id="updateXiao">
+UPDATE `wuzu`.`t_shopxiaolei`
+SET
+  `name` = #{name},
+  `daid` = #{daid},
+  `beizhu` = #{beizhu}
+WHERE `id` = #{id};
+    </update>
+
+</mapper>
