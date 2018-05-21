@@ -33,7 +33,9 @@ public class ZxlServiceimpl implements ZxlService{
                 for (int i = 0; i<list.size(); i++){
                     if(list.get(i).getHoutailonginname().equals(username)){
                         if(list.get(i).getHoutailonginpwd().equals(password)){
-
+                            RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+                            HttpServletRequest request = ((ServletRequestAttributes)ra).getRequest();
+                            request.getSession().setAttribute("user1",list.get(i));
                             System.out.print("---"+list.get(i).getHoutailonginpwd()+"-----"+list.get(i).getHoutailonginname());
                             return "成功";
                         }else{
@@ -42,7 +44,9 @@ public class ZxlServiceimpl implements ZxlService{
                         }
                     }else if(list.get(i).getShoujihao().equals(username)){
                         if(list.get(i).getHoutailonginpwd().equals(password)){
-
+                            RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+                            HttpServletRequest request = ((ServletRequestAttributes)ra).getRequest();
+                            request.getSession().setAttribute("user1",list.get(i));
                             System.out.print("---"+list.get(i).getHoutailonginpwd()+"-----"+list.get(i).getHoutailonginname());
                             return "成功";
                         }else{

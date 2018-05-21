@@ -24,7 +24,7 @@
         -webkit-user-select: none;/*?????????????е?????*/
     }
     .tb{
-        width: 410px;
+        width: 810px;
         border: 3px solid #DDDDDD;
         border-radius: 15px;
         box-shadow: 2px 3px 5px #DDDDDD;

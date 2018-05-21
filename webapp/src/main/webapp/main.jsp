@@ -440,62 +440,114 @@ dialog.js"></script>
             error:function(){
                 alert("查询出错！！！")
             }
-        })
-        /*$.ajax({
-         url:"<%=request.getContextPath()%>/zzyController/selectquanbu.do",
-         //data:"",
-         type:"post",
-         dataType:"json",
-         async:false,
-         success:function(pager){
-         console.log(pager);
+        });
 
-         selectshangpinquanbu(pager)
-         },
-         error:function(){
-         alert("查询出错！！！")
-         }
-         })*/
-
-        /*$.ajax({
-         url:"<%=request.getContextPath()%>/zzyController/queryXin.do",
-         type:"post",
-         dataType:'json',
-         async:false,
-         success:function(aa){
-
-         console.log(aa)
-         for (var i = 0; i < aa.length; i++) {
-         str1 += "<li><a onclick='ckxinwenxiangqing("+aa[i].newsId+")'><font
-         size='1'>"+aa[i].newsName+"</font></a></li>";
-         }
-         $("#xinwen").html(str1);
-         },
-         error:function(){
-         }
-
-
-         })*/
-        /*  $.ajax({
-
-         url:"<%=request.getContextPath()%>/zzyController/querybianqian.do",
-         type:"post",
-         dataType:'json',
-         // async:false,
-         success:function(aa){
-         alert(aa)
-         console.log(aa)
-
-         for (var i = 0; i < aa.length; i++) {
-         uio += "<a href='"+aa[i].labeladdress+"'class='navbar-brand dropdown-toggle' ><font size='1' color='white'>"+aa[i].labelname+"</font></a>";
-         }
-         $("#mmp").html(uio);
-         },
-         error:function(){
-         }
-         })*/
 
     })
+    function ckms() {
+        //查询商品秒杀
+        $.ajax({
+            url:"<%=request.getContextPath()%>/zzyController/queryMiao.do",
+            //data:"",
+            type:"post",
+            datatype:"json",
+            async:false,
+            success:function(pager){
+
+                selectshangpinmiaosha(pager)
+            },
+            error:function(){
+                alert("查询出错！！！")
+            }
+        })
+    }
+    function selectshangpinmiaosha(pager) {
+     alert(pager);
+
+        var tr = "";
+        for (var i = 0; i < pager.length; i++) {
+//            alert(pager[i].id);
+            tr += "<font size='1' color='red'><span id='msgshowmiaos'></span>" +
+                "</font><br><div style='float:left' ><img src='" + pager[i].goodimage + "'  " +
+                "width='200px' height='200px' >" +
+                "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><span>" +
+                "<font size='1'>秒杀价格：" + pager[i].mprice + "￥ </font></span><br>" +
+                "<font size='1' color='green'>仅剩<font size='3' color='#ff0000'>" +
+                "<span id='kucunxianshi'> " +pager[i].count+ "</span></font>件商品了噢！</font>" +
+                "<input type='button' class='btn btn-danger' value='点击秒杀' id='miaoshabut' style='display:none' " +
+                "onclick='miaoshasp(" + pager[i].id + "," + pager[i].count + ")' ></div>"
+
+
+        }
+        $("#terezhanshi").html(tr);
+
+
+    $.ajax({
+        url:'<%=request.getContextPath()%>/zzyController/selectMiao.do',
+        type:"post",
+        dataType:"json",
+        success:function(result){
+            alert(result)
+
+            if(result.flag==1){
+                second=result.miaoshu;
+                var toDays = function(){
+                    var s = second % 60; // 秒
+                    var mi = (second - s) / 60 % 60; // 分钟
+                    var h =  ((second - s) / 60 - mi ) / 60 % 24; // 小时
+                    var d =  (((second - s) / 60 - mi ) / 60 - h ) / 24 // 天
+                    return "距活动开始还有：" + d + "天" + h + "小时" + mi + "分钟" + s + "秒";
+                }
+                var timejishi1 =window.setInterval(function(){
+                    if(second==0){
+                        $("#miaoshabut").show();
+                        ckms();
+                        clearInterval(timejishi1);
+                        return;
+                    }else
+                        second --;
+                    document.getElementById("msgshowmiaos").innerHTML = toDays ();
+                }, 1000);
+
+            }
+
+            if(result.flag==2){
+                second=result.miaoshu2;
+                var timejishi =null;
+                var toDays = function(){
+                    var s = second % 60; // 秒
+                    var mi = (second - s) / 60 % 60; // 分钟
+                    var h =  ((second - s) / 60 - mi ) / 60 % 24; // 小时
+                    var d =  (((second - s) / 60 - mi ) / 60 - h ) / 24 // 天
+                    return "距活动结束还有：" + d + "天" + h + "小时" + mi + "分钟" + s + "秒";
+                }
+                var timejishi =window.setInterval(function(){
+                    if(second==0){
+                        $("#miaoshabut").hide();
+                        $("#msgshowmiaos").html("秒杀结束")
+                        ckms();
+                        clearInterval(timejishi);
+                        return;
+                    }else
+                        second --;
+                    document.getElementById("msgshowmiaos").innerHTML = toDays ();
+                }, 1000);
+                $("#miaoshabut").show();
+                $("#kucunxianshi").html(result.count)
+            }
+
+            if(result.flag==3){
+                $("#miaoshabut").hide();
+                $("#msgshowmiaos").html("秒杀结束")
+                $("#kucunxianshi").html(result.count)
+
+                return;
+            }
+        },error:function(){
+            alert('警告','报错');
+        }
+    })
+    }
 
     function liebiao(dalei){
         var uio = "";
@@ -572,7 +624,6 @@ dialog.js"></script>
 
         }
         $("#terezhanshi").html(tr);
-        //alert(tr)
 
     }
 
@@ -600,20 +651,6 @@ dialog.js"></script>
 
     }
 
-    /* function ckxinwenxiangqing(id){
-     BootstrapDialog.show({
-     title:"新闻详情",
-     cssClass: 'login-dialog',
-     message: $('<div></div>').load('<%=request.getContextPath()%>/zzyController/xiangqing.do?id='+id),
-     buttons: [{
-     label: '关闭',
-     action: function(dialog) {
-     //更改弹框标题
-     BootstrapDialog.closeAll();
-     }
-     }]
-     });
-     }*/
     //查询分类
     function ckspxl(id){
 
@@ -647,8 +684,19 @@ dialog.js"></script>
                 alert("查询出错！！！")
             }
         })
+
+
+
+
+    //alert(tr)
     }
 
+</script>
+
+<script>
+    function miaoshasp() {
+        
+    }
 </script>
 </body>
 </html>

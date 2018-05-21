@@ -49,4 +49,18 @@ public interface ZzyDao {
     Goods selectxiang(Integer id);
 
     Goods queryShopsById(Integer id);
+
+
+    List<Miao> queryMiao();
+
+
+    void deleteAll();
+
+    void addMiao(Miao miao);
+
+    void updatekucun(@Param("a") Integer a, @Param("b") Integer b);
+
+    List<Miao> selectMiao();
+
+    void updateId(Integer a);
 }

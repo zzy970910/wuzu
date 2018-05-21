@@ -1,5 +1,7 @@
 package com.jk.bean.lx;
 
+import java.util.Date;
+
 public class Goods {
     private Integer id;
     private String sname;
@@ -19,6 +21,19 @@ public class Goods {
     private String image;
     private String dname;
     private Integer mid;
+
+
+
+
+    private Date begintime;//=========
+
+    private Date endtime;//=========
+
+    private Integer mcount;//===========
+
+    private Double mprice;//===========
+
+    private String namess;//===========
 
     public Integer getId() {
         return id;
@@ -164,6 +179,46 @@ public class Goods {
         this.mid = mid;
     }
 
+    public Date getBegintime() {
+        return begintime;
+    }
+
+    public void setBegintime(Date begintime) {
+        this.begintime = begintime;
+    }
+
+    public Date getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(Date endtime) {
+        this.endtime = endtime;
+    }
+
+    public Integer getMcount() {
+        return mcount;
+    }
+
+    public void setMcount(Integer mcount) {
+        this.mcount = mcount;
+    }
+
+    public Double getMprice() {
+        return mprice;
+    }
+
+    public void setMprice(Double mprice) {
+        this.mprice = mprice;
+    }
+
+    public String getNamess() {
+        return namess;
+    }
+
+    public void setNamess(String namess) {
+        this.namess = namess;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -185,6 +240,11 @@ public class Goods {
                 ", image='" + image + '\'' +
                 ", dname='" + dname + '\'' +
                 ", mid=" + mid +
+                ", begintime='" + begintime + '\'' +
+                ", endtime='" + endtime + '\'' +
+                ", mcount=" + mcount +
+                ", mprice=" + mprice +
+                ", namess='" + namess + '\'' +
                 '}';
     }
 }

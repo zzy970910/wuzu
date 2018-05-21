@@ -303,7 +303,7 @@
                     // /!*  $('#modal-container-467928').modal('hide'); *!/
                     /*  document.getElementById("unss").value=" ";
                       document.getElementById("pwdss").value=" ";*/
-                    location.href="<%=request.getContextPath()%>/main.jsp";
+                    location.href="main.jsp";
 
 
 
@@ -437,7 +437,7 @@
                         // /!*  $('#modal-container-467928').modal('hide'); *!/
                       /*  document.getElementById("unss").value=" ";
                         document.getElementById("pwdss").value=" ";*/
-                        location.href="../main.jsp";
+                        location.href="main.jsp";
 
 
                     }else if(fang=='"用户或密码错误"'){

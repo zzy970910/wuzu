@@ -48,5 +48,9 @@ public interface ZzyService {
 
     Goods selectxiang(Integer id);
 
-    void addShop(Goods goods);
+    List<Miao> queryMiao();
+
+    void addGoods(Miao miao);
+
+    List<Miao> selectMiao();
 }

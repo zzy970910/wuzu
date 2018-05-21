@@ -56,26 +56,30 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-<!--
-	<mvc:resources location="/js/" mapping="/js/*"/>
+	<!--<mvc:resources location="/js/" mapping="/js/*"/>
 	<mvc:interceptors>
 		<bean class="com.jk.interceptor.MyInterceptor"/>
 	</mvc:interceptors>-->
  	<!-- Interceptors拦截器--> 
- 	<!--  <mvc:interceptors> 
+ 	  <mvc:interceptors>
           <mvc:interceptor> 
  	        <mvc:mapping path="/**" /> 
- 	        <mvc:exclude-mapping path="/login.jsp"/> 
+ 	        <mvc:exclude-mapping path="/long.jsp"/>
+ 	        <mvc:exclude-mapping path="/zxluser/toShow.do"/>
+ 	        <mvc:exclude-mapping path="/main.jsp"/>
+ 	         <mvc:exclude-mapping path="/zengzhu.jsp"/>
  	        <mvc:exclude-mapping path="/js/**"/>
  	        <mvc:exclude-mapping path="/css/**"/> 
- 	        <mvc:exclude-mapping path="/jsp/**"/> 
- 	        <mvc:exclude-mapping path="/areaLogic/**"/> 
-	        <mvc:exclude-mapping path="/images/**"/> 
- 	        <mvc:exclude-mapping path="/imgss/**"/> 
- 	        <mvc:exclude-mapping path="/bootstrap-3.3.7-dist/**"/>
- 	        <mvc:exclude-mapping path="/attached/image/**"/> 
- 	    	<bean class="com.jk.interceptors.InterFilter"/> 
+ 	        <mvc:exclude-mapping path="/assets/**"/>
+ 	        <mvc:exclude-mapping path="/image/**"/>
+	        <mvc:exclude-mapping path="/js1.7/**"/>
+ 	        <mvc:exclude-mapping path="/news/**"/>
+ 	        <mvc:exclude-mapping path="/styles/**"/>
+ 	        <mvc:exclude-mapping path="/zxl/**"/>
+			  <mvc:exclude-mapping path="//**"/>
+
+			  <bean class="com.jk.interceptor.MyInterceptor"/>
  	    </mvc:interceptor>	
-   </mvc:interceptors>  -->
+   </mvc:interceptors>
    
 </beans>

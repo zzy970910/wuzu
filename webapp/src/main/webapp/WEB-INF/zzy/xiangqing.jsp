@@ -21,7 +21,7 @@
 </head>
 <style>
     html,body{
-        height: 10%;
+        height: 100%;
         font-size: 15px;
         color: black;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -29,7 +29,7 @@
         -webkit-user-select: none;/*��ֹ�û�ѡ��ҳ���е�����*/
     }
     .tb{
-        width: 610px;
+        width: 90%;
         border: 3px solid #DDDDDD;
         border-radius: 15px;
         box-shadow: 2px 3px 5px #DDDDDD;

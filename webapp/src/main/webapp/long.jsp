@@ -115,7 +115,7 @@
                         "username":username,
                         "password":password
                     },
-
+                    async:false,
                     dataType:"text",
                     scriptCharset: 'utf-8',
                     success:function(fang){
@@ -124,7 +124,8 @@
                         if(fang=="成功"){
                       //  alert(fang);
                             // /!*  $('#modal-container-467928').modal('hide'); *!/
-                           location.href="<%=request.getContextPath()%>/index.jsp";
+                            alert(12);
+                           location.href="<%=request.getContextPath()%>/zzyController/toIndex.do";
 
                         }else if(fang=="用户或密码错误"){
                             alert("用户或密码错误")

@@ -6,11 +6,13 @@ import com.jk.bean.lx.*;
 import com.jk.bean.mn.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.jk.service.ZzyService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,11 +174,84 @@ public class ZzyController {
 
 
   }
-  @RequestMapping("/addShop")
+  @RequestMapping("queryMiao")
     @ResponseBody
-    public void addShop(Goods goods){
-      zzyService.addShop(goods);
+    public List<Miao> queryMiao(){
+        return zzyService.queryMiao();
   }
+  @RequestMapping("/addGoods")
+    @ResponseBody
+    public void addGoods(Miao miao){
+      zzyService.addGoods(miao);
+  }
+
+   //查询秒杀
+
+  @RequestMapping("/selectMiao")
+    @ResponseBody
+    public Map<String,Object> selectMiao(){
+      Map<String,Object> map = new HashMap<String, Object>();
+      List<Miao> list= zzyService.selectMiao();
+      String mag="";
+      Integer flag=0;
+      if(list!=null&&list.get(0)!=null) {
+          long nowtime = new Date().getTime();
+          long time = list.get(0).getBegintime().getTime();
+          long endtime = list.get(0).getEndtime().getTime();
+          long shengtimexioashi = (endtime - nowtime) / 1000 / 60 / 60;
+          long endfentime = (endtime - nowtime) / 1000 / 60 - shengtimexioashi * 60;
+          long endmiaotime = (endtime - nowtime) / 1000 - shengtimexioashi * 60 - endfentime * 60;
+          long daojishi = 0l;
+          long daojishi2 = 0l;
+          long l = time - nowtime;
+          long l1 = (time - nowtime) / 1000;
+          long l2 = (endtime - nowtime) / 1000;
+          Integer cout = list.get(0).getCount();
+          if (l > 0) {
+              long m = l / 1000 / 60 / 60;
+              if (m > 1) {
+                  long m1 = l / 1000 / 60 - m * 60;
+                  long m2 = l / 1000 - m1 * 60 - m * 60 * 60;
+                  mag = "距离秒杀还有" + m + "小时" + m1 + "分钟" + m2 + "秒";
+                  daojishi = l1;
+                  flag = 1;//还未开始
+              } else {
+                  long m1 = l / 1000 / 60;
+                  long m2 = l / 1000 - m1 * 60 - m * 60 * 60;
+                  mag = "距离秒杀还有0小时" + m1 + "分钟" + m2 + "秒";
+                  daojishi = l1;
+                  flag = 1;//还未开始
+              }
+          } else {
+              long time2 = list.get(0).getEndtime().getTime();
+              if ((time2 - nowtime) < 0) {
+                  mag = "秒杀已结束";
+                  daojishi = l1;
+                  cout = 0;
+                  flag = 3;
+              } else {
+                  mag = "秒杀进行中..剩余时间" + shengtimexioashi + "小时" + endfentime + "分" + endmiaotime + "秒";
+                  daojishi = l1;
+                  daojishi2 = l2;
+                  flag = 2;//已经开始
+
+
+              }
+          }
+
+          map.put("mag", mag);
+          map.put("flag", flag);
+          map.put("count", cout);
+          map.put("miaoshu", daojishi);
+          map.put("miaoshu2", daojishi2);
+
+      }
+      return map;
+  }
+@RequestMapping("toIndex")
+    public String toIndex(){
+        return "/WEB-INF/zzy/index";
+}
 
 
 }

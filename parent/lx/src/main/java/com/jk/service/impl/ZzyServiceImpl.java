@@ -6,9 +6,14 @@ import com.jk.bean.mn.News;
 import com.jk.dao.LabelDao;
 import com.jk.dao.ZzyDao;
 import com.jk.service.ZzyService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -119,15 +124,42 @@ public class ZzyServiceImpl implements ZzyService {
     }
 
     @Override
-    public void addShop(Goods goods) {
-           Integer id = goods.getId();
-         Goods goods1 =  zzyDao.queryShopsById(id);
-           Miao miao =new Miao();
-        miao.setMimage(goods.getImage());
-        miao.setId(goods1.getId());
-        miao.setCount(goods1.getCount());
-        miao.setMprice(goods1.getPrice());
+    public List<Miao> queryMiao() {
+        return zzyDao.queryMiao();
+    }
 
+    @Override
+    public void addGoods(Miao miao) {
+       Goods goods1 = zzyDao.queryShopsById(miao.getGoodid());
+       miao.setGoodimage(goods1.getImage());
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            miao.setBegintime(sdf.parse(miao.getBegintimeStr()));
+            miao.setEndtime(sdf.parse(miao.getEndtimeStr()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(miao.getBegintime().getTime() > new Date().getTime()){
+            miao.setStatus("0");//未生效
+        }else{
+            if(miao.getEndtime().getTime() > new Date().getTime()){
+                miao.setStatus("1");//生效中
+            }else{
+                miao.setStatus("2");//已失效
+            }
+        }
+        zzyDao.deleteAll();
+        zzyDao.addMiao(miao);
+        Integer a =miao.getId();
+        Integer b =miao.getCount();
+          zzyDao.updateId(a);
+        zzyDao.updatekucun(a,b);
+    }
+
+    @Override
+    public List<Miao> selectMiao() {
+        return zzyDao.selectMiao();
     }
 
 

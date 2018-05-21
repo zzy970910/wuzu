@@ -48,11 +48,22 @@
         <result column="tid" property="tid"></result>
         <result column="pasttime" property="pasttime"></result>
         <result column="image" property="image"></result>
+        <result column="mid" property="mid"></result>
+
     </resultMap>
     <resultMap id="biao" type="com.jk.bean.ht.Label" >
         <id column="labelid " property="labelid "  />
         <result column="labelname" property="labelname"  />
         <result column="labeladdress" property="labeladdress"  />
+    </resultMap>
+    <resultMap id="miao" type="com.jk.bean.lx.Miao">
+        <id column="id " property="id "  />
+        <result column="goodid" property="goodid"  />
+        <result column="count" property="count"  />
+        <result column="begintime" property="begintime"  />
+        <result column="endtime" property="endtime"  />
+        <result column="mprice" property="mprice"  />
+        <result column="goodimage" property="goodimage"  />
     </resultMap>
 
     <select id="getDingWhere" resultMap="indent">
@@ -146,4 +157,25 @@
     <select id="queryShopsById" parameterType="Integer" resultType="com.jk.bean.lx.Goods">
         SELECT * FROM t_shop WHERE id=#{id}
     </select>
+    <select id="queryMiao" resultMap="miao">
+        SELECT  * FROM  t_miaosha WHERE status='1'
+    </select>
+    <delete id="deleteAll">
+        DELETE FROM t_miaosha
+    </delete>
+    <insert id="addMiao" parameterType="com.jk.bean.lx.Miao">
+ insert into t_miaosha
+		values(#{id},#{begintime},#{count},#{endtime},#{goodid},#{goodimage},#{mprice},#{status})
+    </insert>
+    <update id="updatekucun" parameterType="Integer">
+        UPDATE  t_shop SET kucun =kucun-#{b} WHERE  id=#{a}
+    </update>
+    <select id="selectMiao" resultMap="miao">
+
+        SELECT  * FROM t_miaosha
+    </select>
+    <update id="updateId" parameterType="Integer">
+        UPDATE t_miaosha SET status=1 WHERE id=#{a}
+    </update>
+
 </mapper>

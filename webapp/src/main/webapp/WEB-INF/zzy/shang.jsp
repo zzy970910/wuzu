@@ -12,8 +12,8 @@
 </head>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-easyui/jquery.easyui.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/js/jquery-easyui/themes/ui-sunny/easyui.css"/>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/js/jquery-easyui/themes/icon.css"/>
+<%--<link rel="stylesheet" href="<%=request.getContextPath() %>/js/jquery-easyui/themes/ui-sunny/easyui.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/js/jquery-easyui/themes/icon.css"/>--%>
 <body><script type="text/javascript" src="<%=request.getContextPath()%>/js/uploadify/jquery.uploadify.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/js/uploadify/uploadify.css"/>
 <div>
@@ -35,7 +35,7 @@
 <div  class="easyui-linkbutton" onclick="exportexcel()" data-options="iconCls:'icon-save',plain:true">导出数据</div>
 
 <div id="addShop"></div>
-<div id="zzy1"></div>
+<table id="zzy1"></table>
 
 
 <script type="text/javascript">
@@ -74,15 +74,10 @@
                         }
                     }
                 },
-                {field:'mid',title:'是否秒杀',width:100,
+               /* {field:'mid',title:'是否秒杀',width:100,
                     formatter: function(value,row,index){
-                        if (row.mid=1){
-                            return "是";
-                        } else {
-                            return "否";
-                        }
-                    }
-                },
+                       return row.mid==1?"是":"否"
+                }},*/
             ]]  ,
 
             fitColumns:true,
@@ -200,10 +195,10 @@
         //alert(id[0].id)
         alert(id[0].id)
         if(id.length != 1){
-            $.messager.alert('警告','请选择要设置的一项');
+            alert("警告");
         }else{
             $("#addShop").dialog({
-                title: '修改信息',
+                title: '设为秒杀',
                 width: 400,
                 height: 200,
                 closed: false,
@@ -217,7 +212,7 @@
                     handler:function(){
                         //alert($("#add_form").serialize());
                         $.ajax({
-                            url:"<%=request.getContextPath()%>/zzyController/addShop.do",
+                            url:"<%=request.getContextPath()%>/zzyController/addGoods.do",
                             data:$("#miaoshaform").serialize(),
                             type:"post",
                             success:function(){
@@ -235,7 +230,7 @@
                     text:'取消',
                     iconCls:'icon-cancel',
                     handler:function(){
-                        $("#dialog_maosha").dialog("close");
+                        $("#addShop").dialog("close");
                     }
                 }]
             })
