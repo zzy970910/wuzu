@@ -163,7 +163,7 @@ dialog.js"></script>
     <div class="head-foot">
 
         <ul class="daohang">
-            <li class="sk">全部商品</li>
+            <li class="sk" style="background-color: red">全部商品</li>
             <li><a href="https://www.baidu.com/">百度一下</a></li>
             <li><a href="http://www.jinkeit.com/">金科教育</a></li>
             <li><a href="http://www.jd.com/">京东商城</a></li>
@@ -426,24 +426,28 @@ dialog.js"></script>
 
         })
         //查询特价
-        $.ajax({
-            url:"<%=request.getContextPath()%>/zzyController/querytejia.do",
-            //data:"",
-            type:"post",
-            datatype:"json",
-            async:false,
-            success:function(pager){
-
-
-                selectshangpintejia(pager)
-            },
-            error:function(){
-                alert("查询出错！！！")
-            }
-        });
 
 
     })
+    function cktj(){
+
+
+    $.ajax({
+        url:"<%=request.getContextPath()%>/zzyController/querytejia.do",
+        //data:"",
+        type:"post",
+        datatype:"json",
+        async:false,
+        success:function(pager){
+
+
+            selectshangpintejia(pager)
+        },
+        error:function(){
+            alert("查询出错！！！")
+        }
+    });
+    }
     function ckms() {
         //查询商品秒杀
         $.ajax({
@@ -695,7 +699,28 @@ dialog.js"></script>
 
 <script>
     function miaoshasp() {
-        
+        if(confirm("确定秒杀吗??")){
+            $.ajax({
+                url:'<%=request.getContextPath()%>/zzyController/tomiaoshagoods.do',
+                data:{"page":page,"rows":rows},
+                type:"post",
+                dataType:"json",
+                success:function(result){
+                    if(result==2){
+                        alert('恭喜,秒杀成功');
+
+                        location.href="<%=request.getContextPath()%>/main.jsp";
+                    }else{
+                        alert('不好意思,商品已经卖完了呦，呦呵呵呵！！！');
+                    }
+                },error:function(){
+                    if(confirm("你还未登录，是否跳转到登录页面？")){
+                        location.href="<%=request.getContextPath()%>/zengzhu.jsp";
+                    }
+                }
+            })
+        }
+
     }
 </script>
 </body>
