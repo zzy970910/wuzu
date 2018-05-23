@@ -53,4 +53,16 @@ public interface ZzyService {
     void addGoods(Miao miao);
 
     List<Miao> selectMiao();
+
+    void updateKucun(Integer id);
+
+    Goods querygoodsbyid(Integer gid);
+
+    void addljgm(Indent indent,Goods goods, Integer uid);
+
+    void addGou(Integer uid, Goods good, Gou gou);
+
+    List selectGG(Integer id);
+
+    void updateGwc(Integer id);
 }

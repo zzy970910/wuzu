@@ -7,25 +7,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- jquery -->
+<%--
 <script type="text/javascript" src="<%=path %>/js/jquery-3.2.1/jquery-3.2.1.js"></script>
+--%>
 <!-- bootstrap -->
 <link rel="stylesheet" href="<%=path %>/js/boot/bootstrap/css/bootstrap-theme.min.css" >
 <link rel="stylesheet" href="<%=path %>/js/boot/bootstrap/css/bootstrap.min.css" >
+<%--
 <script type="text/javascript" src="<%=path %>/js/boot/bootstrap/js/bootstrap.min.js"></script>
+--%>
 <!-- treeview -->
-<link rel="stylesheet" href="<%=path %>/js/boot/bootstrap-treeview/dist/bootstrap-treeview.min.css" >
-<script type="text/javascript" src="<%=path %>/js/boot/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+<%--<link rel="stylesheet" href="<%=path %>/js/boot/bootstrap-treeview/dist/bootstrap-treeview.min.css" >
+<script type="text/javascript" src="<%=path %>/js/boot/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>--%>
 <!-- addtabs -->
-<link rel="stylesheet" href="<%=path %>/js/boot/bootStrap-addTabs/bootstrap.addtabs.css" >
-<script type="text/javascript" src="<%=path %>/js/boot/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+<%--<link rel="stylesheet" href="<%=path %>/js/boot/bootStrap-addTabs/bootstrap.addtabs.css" >
+<script type="text/javascript" src="<%=path %>/js/boot/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>--%>
 <!-- table -->
-<link rel="stylesheet" href="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.css" >
-<script type="text/javascript" src="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.js"></script>
+<%--<link rel="stylesheet" href="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.css" >
+<script type="text/javascript" src="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.js"></script>--%>
+<%--
 <script type="text/javascript" src="<%=path %>/js/boot/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+--%>
 
     <link href="../../image/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     <link type="text/css" rel="stylesheet" href="../../styles/index.css" />
-    <script type="text/javascript" src="js1.72v/jquery-1.7.2.min.js"></script>
+   <%-- <script type="text/javascript" src="js1.72v/jquery-1.7.2.min.js"></script>--%>
     <script type="text/javascript" src="../../js/index.js"></script>
 
 

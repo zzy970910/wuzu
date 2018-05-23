@@ -14,94 +14,140 @@
 <head>
     <title>Title</title>
     <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" />
-    <link href="<%=request.getContextPath() %>/assets/lib/bootstrap/css/bootstrap.css"
-          rel="stylesheet" />
+    <%--<link href="<%=request.getContextPath() %>/assets/lib/bootstrap/css/bootstrap.css"
+          rel="stylesheet" />--%>
+    <jsp:include page="/WEB-INF/zzy/base.jsp"></jsp:include>
+
     <script src="assets/lib/jquery/jquery-1.11.0.js"></script>
     <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/zzsc.css">
+    <script type="text/javascript" class="library" src="<%=request.getContextPath() %>/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" class="library" src="<%=request.getContextPath() %>/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript" class="library" src="<%=request.getContextPath() %>/js/zzsc.js"></script>
 </head>
-<style>
-    html,body{
-        height: 100%;
-        font-size: 15px;
-        color: black;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        user-select:none;
-        -webkit-user-select: none;/*��ֹ�û�ѡ��ҳ���е�����*/
-    }
-    .tb{
-        width: 90%;
-        border: 3px solid #DDDDDD;
-        border-radius: 15px;
-        box-shadow: 2px 3px 5px #DDDDDD;
-    }
-    .tb tr{
-        background: #F0F0E1;
-        height: 30px;
-    }
-    .tb tr td{
-        border: 1.5px solid #FFFFFF;
-        text-align: center;
 
-    }
-    .tb tr th{
-        border: 1.5px solid #FFFFFF;
-        background: #888888;
-        color: white;
-        border-top:none;
-    }
-    .tb tr th:nth-child(1){
-        border-top-left-radius:15px;
-        border-left: none;
-        border-top:none;
-    }
-    .tb tr th:last-child{
-        border-top-right-radius:15px;
-        border-right: none;
-    }
-    .tb tr:nth-child(1){
-
-        background:#99B3FF;
-
-    }
-    .tb tr:nth-child(2n+1){
-        background:#DDDDDD;
-    }
-    .tb tr:hover{
-        background:#DDDDDD;
-        opacity: 0.6;
-
-    }
-    .tb tr:nth-child(1):hover{
-        border: 1.5px solid #FFFFFF;
-        opacity: 1;
-    }
-    .tb tr:last-child td:nth-child(1){
-
-        border-bottom-left-radius:15px;
-    }
-    .tb tr:last-child td:last-child{
-
-        border-bottom-right-radius:15px;
-    }
-</style>
 <body>
 
 
-<input type="hidden" id="guzid" value="${user.userid}">
-<input type="hidden" id="spid" value="${goods.id }">
+<input type="hidden" id="userid" value="${user.userid}">
+<input type="hidden" id="goodid" value="${goods.id }">
 <!--/#header-->
 <!-- 内容部分开始 -->
 <!-- 详细页开始 -->
+<div class="mgj_rightbar">
+    <div class="mgj-my-cart">
+        <a class="nofollow" href="javascript:gwc(${user.userid});">
+            <i class="s-icon"></i>
+            <div class="s-txt">购物车</div>
+        </a>
+    </div>
+    <div class="mgj-my-coupon">
+        <a class="nofollow" href="javascript:;">
+            <i class="s-icon"></i>
+            <div class="s-txt">优惠券</div>
+        </a>
+    </div>
+    <div class="mgj-my-wallet">
+        <a class="nofollow" href="javascript:;">
+            <i class="s-icon"></i>
+            <div class="s-txt">钱包</div>
+        </a>
+    </div>
+    <div class="mgj-my-browserlog">
+        <a class="nofollow" href="javascript:;">
+            <i class="s-icon"></i>
+            <div class="s-txt">足迹</div>
+        </a>
+    </div>
+    <div class="sideBottom">
+        <a class="nofollow" href="javascript:;">
+            <i class="s-icon"></i>
+        </a>
+    </div>
+
+
+</div>
+<div class="head">
+    <div class="head-top">
+        <ul>
+            <li class="wodexiaodian"><a class="wd" href="../mgjz/index.html">我的小店</a></li>
+            <li class="khfw">
+                <a class="fw" href="#">
+                    客户服务
+                    <ul class="khfwtk">
+                        <li>联系合作</li>
+                        <li>帮助</li>
+                    </ul>
+
+                </a>
+            </li>
+            <%--   <li class="gouwuche">
+                   <!--          		<div class="gwctk"></div>-->
+                   <a class="gwc" href="#">
+                       购物车
+                       <ul class="gwctk">
+                           <li>购物车里没有商品！</li>
+                       </ul>
+                   </a>
+               </li>--%>
+            <%--<li class="dingdan"><a class="dd" href="#">我的订单</a></li>--%>
+            <li ><a class="dl" href="#">登录</a></li>
+            <li ><a class="zc" href="#">注册</a></li>
+
+        </ul>
+
+
+    </div>
+
+    <div class="head-main">
+        <img class="logo" src="/image/head-top-logo.png" />
+        <span class="s1">搜商品<div class="ss1">店铺</div></span>
+        <input class="s2" type="text"  value="既保暖性又时尚感棉服"/>
+        <input class="s3" type="button" />
+        <div class="sao">
+            <img src="/image/head-main-erweima.png" />
+            <span class="mgj">蘑菇街客户端</span>
+        </div>
+        <ul>
+            <li><a href="#">毛衣</a></li>
+            <li><a href="#">雪地靴</a></li>
+            <li><a href="#">羽绒服</a></li>
+            <li><a href="#">毛呢外套</a></li>
+            <li><a href="#">连衣裙</a></li>
+            <li><a href="#">家居服</a></li>
+            <li><a href="#">打底裤</a></li>
+            <li><a href="#">包包</a></li>
+            <li><a href="#">打底衫</a></li>
+        </ul>
+    </div>
+    <div class="head-foot">
+
+        <ul class="daohang">
+            <li class="sk" style="background-color: red">全部商品</li>
+            <li><a href="https://www.baidu.com/">百度一下</a></li>
+            <li><a href="http://www.jinkeit.com/">金科教育</a></li>
+            <li><a href="http://www.jd.com/">京东商城</a></li>
+            <li><a href="#">合作商家</a></li>
+        </ul>
+    </div>
+</div>
 
 <div class="row">
 
     <!-- 右边内容 -->
     <div id="content" class="col-lg-12">
-        <div class="item-meta">
-            <h1 class="meta-tit" style="background-color: red">${goods.sname}</h1>
-            <div class="meta-situ">
-                <div class="meta-magnifier pull-left">
-                    <img  width="300px" height="300px" src="${goods.image}" />
+        <div class="item-meta" >
+            <div class="meta-situ"  >
+                <div class="meta-magnifier pull-left" style="width: 50px">
+                    <div class="con-FangDa" id="fangdajing" style="width: 200px;height:300px">
+                        <div class="con-fangDaIMg" style="width: 200px;height:300px">
+                            <img  src="${goods.image}" style="width: 200px"/>
+                            <!-- 滑块-->
+                           <div class="magnifyingBegin" style="width: 100px;height: 100px;"></div>
+                            <!-- 放大镜显示的图片 -->
+                            <div class="magnifyingShow" style="height:300px;width: 500px"><img src="${goods.image}"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="meta-show pull-right">
                     <h2 class="meta-maintit">${goods.sname}</h2>
@@ -129,24 +175,26 @@
                                 <%-- ${list[0].zhekou == 1 ? list[0].price : "没有折扣" } --%>
                                 <%-- ${stu.stusex == '1' ? "checked" : "" } --%>
                             </li>
-                            <li class="reveal-tit">服    务：</li>
-                            <li class="reveal-sow">由<b class="rev-text-3">金科</b>发货并提供帮助</li>
+
                             <li >商品评分：<i class="icon-main icon-eva-5"></i>(已有n人评价)</li>
                             <li class="reveal-tit">库存：</li>
                             <li class="reveal-sow rev-text-2">${goods.kucun} </li>
                         </ul>
+
                     </div>
                     <div style="border-bottom: 1px dotted #ccc;"></div>
                     <div class="meta-btn">
 
                         <div class="button-group">
-                            <div style="float:left"><button type="button" class="btn btn-danger btn-lg mr20"  onclick="jrgwc(${goods.id})">立即购买</button></div>
-                            <div style="float:left"><button type="button" class="btn btn-addcart btn-lg mr20" onclick="jrgwc1(${goods.id})"><i class="icon-main icon-addcart"></i>加入购物车</button></div>
+                            <div style="float:left"><button type="button" class="btn btn-danger btn-lg mr20"  onclick="ljgm(${goods.id})">立即购买</button></div>
+                            <div style="float:left"><button type="button" class="btn btn-addcart btn-lg mr20" onclick="jrgwc(${goods.id})"><i class="icon-main icon-addcart"></i>加入购物车</button></div>
                             <div style="float:left" id="shoucangsgj"><button type="button" class="btn btn-collect btn-lg" onclick="sccg()"><i class="icon-main icon-like"></i>收藏</button></div>
                         </div>
                     </div>
                 </div>
+
                 <div class="clearfix"></div>
+
             </div>
 
         </div>
@@ -242,40 +290,44 @@
     });
 </script>
 <script type="text/javascript">
+//立即购买
+    function ljgm(gid){
+        //id 是用户id  gid 是商品id
 
+
+        var uid =$("#userid").val();
+
+        $.ajax({
+            url:"<%=request.getContextPath()%>/zzyController/addljgm.do?gid="+gid+"&uid="+uid,
+            type:"post",
+            datatype:"json",
+            async:false,
+            success:function (pager){
+                   alert("购买成功，订单已生成")
+
+                location.href="<%=request.getContextPath() %>/main.jsp";
+            },
+            error:function(){
+                alert("购买失败！！！")
+            }
+        })
+    }
+    //加入购物车
     function jrgwc(gid){
         //id 是用户id  gid 是商品id
 
 
-        var id =$("#guzid").val();
-
+        var uid =$("#userid").val();
+        alert(gid)
+        alert(uid)
         $.ajax({
-            url:"<%=request.getContextPath()%>/buyGoodsAction!addredisList.action?gid="+gid+"&id="+id,
+            url:"<%=request.getContextPath()%>/zzyController/addGou.do?gid="+gid+"&uid="+uid,
+
             type:"post",
             datatype:"json",
             async:false,
             success:function (pager){
 
-
-                location.href="<%=request.getContextPath() %>/qiantai/cart.jsp?id="+id ;
-            },
-            error:function(){
-                alert("加入购物车失败！！！")
-            }
-        })
-    }
-    function jrgwc1(gid){
-        //id 是用户id  gid 是商品id
-
-
-        var id =$("#guzid").val();
-
-        $.ajax({
-            url:"<%=request.getContextPath()%>/buyGoodsAction!addredisList.action?gid="+gid+"&id="+id,
-            type:"post",
-            datatype:"json",
-            async:false,
-            success:function (pager){
 
                 alert("已经成功加入购物车，请在右上角购物车中结算")
 

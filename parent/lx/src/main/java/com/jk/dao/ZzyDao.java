@@ -3,6 +3,7 @@ package com.jk.dao;
 import com.jk.bean.ht.Label;
 import com.jk.bean.lx.*;
 import com.jk.bean.mn.News;
+import com.jk.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -58,9 +59,24 @@ public interface ZzyDao {
 
     void addMiao(Miao miao);
 
-    void updatekucun(@Param("a") Integer a, @Param("b") Integer b);
+    void updatekucun22(@Param("a") Integer a, @Param("b") Integer b);
 
     List<Miao> selectMiao();
 
     void updateId(Integer a);
+
+    void updateKucun(Integer id);
+
+    Goods querygoodsbyid(Integer gid);
+
+    void addljgm(@Param("indent") Indent indent, @Param("goods") Goods goods, @Param("uid") Integer uid, @Param("uname") String uname);
+
+    String selectName(Integer uid);
+
+    void addGou(@Param("uid")Integer uid, @Param("good") Goods good, @Param("gou") Gou gou);
+
+
+    List selectGG(Integer id);
+
+    void updateGwc(Integer id);
 }

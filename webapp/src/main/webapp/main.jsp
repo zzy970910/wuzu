@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>金科&nbsp;-&nbsp;购物商城！</title>
@@ -13,71 +14,65 @@
           rel="stylesheet" />
     <script src="assets/lib/jquery/jquery-1.11.0.js"></script>
     <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="js/boot/bootstrap-dialog/dist/css/bootstrap-dialog.css" >
+    <%--<link rel="stylesheet" href="js/boot/bootstrap-dialog/dist/css/bootstrap-dialog.css" >
     <script type="text/javascript" src="js/boot/bootstrap-dialog/dist/js/bootstrap-
-dialog.js"></script>
-    <!-- bootstrap-dialog -->
-    <%--  <script>
-          $(document).ready(function() {
-              var marginTop = 0;
-              var bool = false;
-              setInterval(function() {
-                  if (bool)
-                      return;//判断运行和停止
-                  $(".news1 li:first").animate({
-                      marginTop : marginTop--
-                  }, 10, function() {
-                      if (!($(this).is(":animated"))) { //判断是否有一个动画节点
-                          if ((-marginTop) >= $(this).height()) { //判断移出位置是否超过高度
-                              $(this).css("margin", "0");
-                              $(this).appendTo($(".news1")); //把第一个节点移到ul后面
-                              marginTop = 0; //重新设置移动数值
-                          }
-                      }
-                  });
-              }, 100);
-              $(".news1").mouseover(function() { //li鼠标移入，停止移动
-                  bool = true;
-              });
-              $(".news1").mouseout(function() {
-                  bool = false;
-              });
-
-          });
-          $(document).ready(function() {
-              var marginTop = 0;
-              var bool = false;
-              setInterval(function() {
-                  if (bool)
-                      return;//判断运行和停止
-                  $(".news2 li:first").animate({
-                      marginTop : marginTop--
-                  }, 10, function() {
-                      if (!($(this).is(":animated"))) { //判断是否有一个动画节点
-                          if ((-marginTop) >= $(this).height()) { //判断移出位置是否超过高度
-                              $(this).css("margin", "0");
-                              $(this).appendTo($(".news2")); //把第一个节点移到ul后面
-                              marginTop = 0; //重新设置移动数值
-                          }
-                      }
-                  });
-              }, 100);
-              $(".news2").mouseover(function() { //li鼠标移入，停止移动
-                  bool = true;
-              });
-              $(".news2").mouseout(function() {
-                  bool = false;
-              });
-
-          });
-      </script>--%>
+dialog.js"></script>--%>
+    <style type="text/css">
+        *{margin:0px; padding:0px;}
+        .small-box {
+            width:300px;
+            height:300px;
+            margin-left:100px;
+            margin-top:100px;
+            border:1px #ccc solid;
+            cursor:move;
+            float:left;
+            position:relative;
+        }
+        .small-box img {
+            width:300px;
+            height:300px;
+        }
+        .tool {
+            width:150px;
+            height:150px;
+            background-color:gold;
+            opacity:0.6;
+            filter:alpha(opacity=60);
+            position:absolute;
+            left:0px;
+            top:0px;
+            display:none;
+        }
+        .tool.active {
+            display:block;
+        }
+        .big-box {
+            width:300px;
+            height:300px;
+            border:1px #ccc solid;
+            overflow:hidden;
+            float:left;
+            margin-top:100px;
+            position:relative;
+            display:none;
+        }
+        .big-box.active {
+            display:block;
+        }
+        .big-box img {
+            width:600px;
+            height:600px;
+            position:absolute;
+        }
+    </style>
 </head>
 
 <body>
-
+${user.userid}
 <div class="mgj_rightbar">
     <div class="mgj-my-cart">
-        <a class="nofollow" href="javascript:;">
+        <a class="nofollow" href="javascript:gwc(${user.userid});">
             <i class="s-icon"></i>
             <div class="s-txt">购物车</div>
         </a>
@@ -182,7 +177,7 @@ dialog.js"></script>
         <%-- <a class="navbar-brand dropdown-toggle" href="#">全部商品分类 <b
                  class="caret"></b></a>--%>
 
-        <div id="categories" class="dropdown-menu" style="height:550px;background-color: lightblue">
+        <div id="categories" class="dropdown-menu" style="height:540px;width:235px;background-color: #2aabd2">
 
         </div>
 
@@ -236,7 +231,7 @@ dialog.js"></script>
 <br><br><br>
 <div class="panel panel-info">
     <div class="panel-heading">
-        &nbsp;&nbsp;&nbsp;<font style="size:100px">全部商品</font>
+        &nbsp;&nbsp;&nbsp;<font style="size:100px">推荐商品</font>
     </div>
     <div class="panel-body">
         <div  id="shangpinzhanshi" class="ppg" style="margin-left: 50px"></div>
@@ -397,11 +392,29 @@ dialog.js"></script>
     </div>
 
 </div>
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" style="width:600px;height:600px" >
+
+        <div class="modal-body">
+            <img src="image/tui.png">
+        </div>
+
+        <%--<div class="modal-footer" >--%>
+        <%--<button type="button" class="btn btn-default"--%>
+        <%--data-dismiss="modal">关闭--%>
+        <%--</button>--%>
+        <%--</div>--%>
+
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script>
 
     //页面加载菜单
     $(function(){
-
+        $("#myModal").modal({
+            keyboard: true
+        });
         var uio = "";
         var str="";
         var str1="";
@@ -425,10 +438,11 @@ dialog.js"></script>
 
 
         })
-        //查询特价
+
 
 
     })
+
     function cktj(){
 
 
@@ -466,11 +480,13 @@ dialog.js"></script>
         })
     }
     function selectshangpinmiaosha(pager) {
-     alert(pager);
+
+
 
         var tr = "";
         for (var i = 0; i < pager.length; i++) {
 //            alert(pager[i].id);
+
             tr += "<font size='1' color='red'><span id='msgshowmiaos'></span>" +
                 "</font><br><div style='float:left' ><img src='" + pager[i].goodimage + "'  " +
                 "width='200px' height='200px' >" +
@@ -478,7 +494,7 @@ dialog.js"></script>
                 "<font size='1'>秒杀价格：" + pager[i].mprice + "￥ </font></span><br>" +
                 "<font size='1' color='green'>仅剩<font size='3' color='#ff0000'>" +
                 "<span id='kucunxianshi'> " +pager[i].count+ "</span></font>件商品了噢！</font>" +
-                "<input type='button' class='btn btn-danger' value='点击秒杀' id='miaoshabut' style='display:none' " +
+                "<input type='button' readonly class='btn btn-danger' value='点击秒杀' id='miaoshabut' style='display:none' " +
                 "onclick='miaoshasp(" + pager[i].id + "," + pager[i].count + ")' ></div>"
 
 
@@ -486,12 +502,14 @@ dialog.js"></script>
         $("#terezhanshi").html(tr);
 
 
+
+
     $.ajax({
         url:'<%=request.getContextPath()%>/zzyController/selectMiao.do',
         type:"post",
         dataType:"json",
         success:function(result){
-            alert(result)
+
 
             if(result.flag==1){
                 second=result.miaoshu;
@@ -565,9 +583,9 @@ dialog.js"></script>
             success:function(xiaolei){
 
                 for (var int = 0; int < dalei.length; int++) {
-                    str+="<li style='background-color: lightblue'><a onclick='ckspdl("+dalei
-                            [int].id+")'><i class='icon-main icon-2' ></i><font color='red' size='3'>"+dalei[int].dname
-                        +"</font></a><ul class='sub-item'  style='background-color: pink;width: 300px;height: 100px' >";
+                    str+="<li class='sk' style='background-color:#b7d2ff'><a onclick='ckspdl("+dalei
+                            [int].id+")'><i class='icon-main icon-2' ></i><font color='black' size='3'>"+dalei[int].dname
+                        +"</font></a><ul class='sub-item'  style='background-color: BEE9F0;width: 300px;height: 100px' >";
                     for (var int2 = 0; int2 < xiaolei.length; int2++) {
                         if(xiaolei[int2].daid==dalei[int].id){
                             str+="<li><a onclick='ckspxl("+xiaolei[int2].id+")' class='icon-main icon-9'>"+xiaolei[int2].name+"</a></li>";
@@ -634,24 +652,30 @@ dialog.js"></script>
 </script>
 <script>
 
-    function chakanxx(id,sname){//弹框
+    function chakanxx(id){
+        alert(122)
+        location.href="<%=request.getContextPath()%>/zzyController/selectxiang.do?id="+id;
 
-        BootstrapDialog.show({
+        /*BootstrapDialog.show({
             title:sname,
 
 
             cssClass: 'login-dialog',
 
-            message: $('<div style="height:800px;overflow:scroll;" ></div>').load('<%=request.getContextPath()%>/zzyController/selectxiang.do?id='+id),
+            message: $('<div></div>').load('<%=request.getContextPath()%>/zzyController/selectxiang.do?id='+id),
+            size: BootstrapDialog.SIZE_WIDE,
+
             buttons: [{
                 label: '关闭',
                 action: function(dialog) {
                     //更改弹框标题
                     BootstrapDialog.closeAll();
+                  //  dialog.setSize(BootstrapDialog.SIZE_NORMAL);
+
                 }
             }]
         });
-
+*/
 
     }
 
@@ -698,29 +722,34 @@ dialog.js"></script>
 </script>
 
 <script>
-    function miaoshasp() {
+    function miaoshasp(id) {
+
         if(confirm("确定秒杀吗??")){
             $.ajax({
-                url:'<%=request.getContextPath()%>/zzyController/tomiaoshagoods.do',
-                data:{"page":page,"rows":rows},
+                url:'<%=request.getContextPath()%>/zzyController/miaoshaGoods.do?id='+id,
+             //  data:{"id":pager[i].id},
                 type:"post",
                 dataType:"json",
                 success:function(result){
-                    if(result==2){
+
+                    if(result==1){
                         alert('恭喜,秒杀成功');
 
                         location.href="<%=request.getContextPath()%>/main.jsp";
-                    }else{
-                        alert('不好意思,商品已经卖完了呦，呦呵呵呵！！！');
-                    }
-                },error:function(){
-                    if(confirm("你还未登录，是否跳转到登录页面？")){
-                        location.href="<%=request.getContextPath()%>/zengzhu.jsp";
+                    }else if(result==2){
+                        if(confirm("你还未登录，是否跳转到登录页面？")){
+                            location.href="<%=request.getContextPath()%>/zengzhu.jsp";
+                        }
                     }
                 }
             })
         }
 
+    }
+
+    function gwc(id) {
+
+        location.href="<%=request.getContextPath()%>/zzyController/selectGwc.do?id="+id;
     }
 </script>
 </body>

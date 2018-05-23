@@ -35,11 +35,14 @@
                     }
                 }
             ]]  ,
+            fit:true,
             fitColumns:true,
             pagination:true,
+
             pageNumber:1,
-            pageSize:3,
+            pageSize:10,
             pageList:[3,6,10],
+            //fit:true,
             loadMsg:"数据库加载中。。。。。。。。。。。。。。。。。。",
         });
     })

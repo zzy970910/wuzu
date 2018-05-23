@@ -2,12 +2,14 @@ package com.jk.bean.lx;
 
 public class Indent {
     private Integer id;
-    private String incode;
-    private String price;
+    private String indentcode;
+    private Double allprice;
     private String createtime;
+    private Integer goodsid;
     private Integer userid;
     private String username;
-    private Integer stauts;
+    private String goodscount;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -17,20 +19,20 @@ public class Indent {
         this.id = id;
     }
 
-    public String getIncode() {
-        return incode;
+    public String getIndentcode() {
+        return indentcode;
     }
 
-    public void setIncode(String incode) {
-        this.incode = incode;
+    public void setIndentcode(String indentcode) {
+        this.indentcode = indentcode;
     }
 
-    public String getPrice() {
-        return price;
+    public Double getAllprice() {
+        return allprice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setAllprice(Double allprice) {
+        this.allprice = allprice;
     }
 
     public String getCreatetime() {
@@ -39,6 +41,14 @@ public class Indent {
 
     public void setCreatetime(String createtime) {
         this.createtime = createtime;
+    }
+
+    public Integer getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(Integer goodsid) {
+        this.goodsid = goodsid;
     }
 
     public Integer getUserid() {
@@ -57,24 +67,34 @@ public class Indent {
         this.username = username;
     }
 
-    public Integer getStauts() {
-        return stauts;
+    public String getGoodscount() {
+        return goodscount;
     }
 
-    public void setStauts(Integer stauts) {
-        this.stauts = stauts;
+    public void setGoodscount(String goodscount) {
+        this.goodscount = goodscount;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "Indent{" +
                 "id=" + id +
-                ", incode='" + incode + '\'' +
-                ", price='" + price + '\'' +
+                ", indentcode='" + indentcode + '\'' +
+                ", allprice=" + allprice +
                 ", createtime='" + createtime + '\'' +
+                ", goodsid=" + goodsid +
                 ", userid=" + userid +
                 ", username='" + username + '\'' +
-                ", stauts=" + stauts +
+                ", goodscount='" + goodscount + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

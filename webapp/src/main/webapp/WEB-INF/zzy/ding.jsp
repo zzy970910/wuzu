@@ -34,20 +34,21 @@
             columns:[[
                 {field:'',checkbox:true},
                 {field:'id',title:'编号',width:100},
-                {field:'incode',title:'订单号',width:100},
-                {field:'price',title:'金额',width:100},
-                {field:'stauts',title:'订单状态',width:100,
+                {field:'indentcode',title:'订单号',width:100},
+                {field:'allprice',title:'金额',width:100},
+                {field:'status',title:'订单状态',width:100,
                     formatter: function(value,row,index){
-                        if (row.stauts==1){
-                            return "已确认";
+                        if (row.status==1){
+                            return "已发货";
                         } else {
-                            return "未确认";
+                            return "未发货";
                         }
                     }
                 },
                 {field:'createtime',title:'创建时间',width:100},
-
+                {field:'goodsid',title:'商品id',width:100},
                 {field:'userid',title:'订单人ID',width:100},
+                {field:'goodscount',title:'商品数量',width:100},
                 {field:'username',title:'订单人用户名',width:100},
 
             ]]  ,

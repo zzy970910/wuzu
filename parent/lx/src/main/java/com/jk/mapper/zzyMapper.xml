@@ -4,12 +4,13 @@
     <resultMap type="com.jk.bean.lx.Indent" id="indent">
 
         <id column="id" property="id"/>
-        <result column="incode" property="incode"></result>
-        <result column="price" property="price"></result>
+        <result column="indentcode" property="indentcode"></result>
+        <result column="allprice" property="allprice"></result>
         <result column="createtime" property="createtime"></result>
         <result column="userid" property="userid"></result>
+        <result column="goodsid" property="goodsid"></result>
         <result column="username" property="username"></result>
-        <result column="stauts" property="stauts"></result>
+        <result column="status" property="status"></result>
 
     </resultMap>
     <resultMap type="com.jk.bean.lx.Da" id="da">
@@ -65,11 +66,24 @@
         <result column="mprice" property="mprice"  />
         <result column="goodimage" property="goodimage"  />
     </resultMap>
+    <resultMap id="gou" type="com.jk.bean.lx.Gou">
+        <id column="id " property="id "  />
+        <result column="carid" property="carid"  />
+        <result column="goodscount" property="goodscount"  />
+        <result column="goodsid" property="goodsid"  />
+        <result column="goodsimage" property="goodsimage"  />
+        <result column="goodsprice" property="goodsprice"  />
+        <result column="goodsname" property="goodsname"  />
+        <result column="goodsxiaoji" property="goodsxiaoji"  />
+        <result column="userid" property="userid"  />
+
+        <result column="userid" property="userid"/>
+    </resultMap>
 
     <select id="getDingWhere" resultMap="indent">
         SELECT * FROM indent WHERE 1=1
-        <if test="incode!=null and incode!=''">
-            and incode =#{incode}
+        <if test="indentcode!=null and indentcode!=''">
+            and indentcode =#{indentcode}
 
         </if>
         <if test="username!=null and username!=''">
@@ -78,10 +92,10 @@
         </if>
     </select>
     <select id="getDingPage" resultMap="indent">
-        SELECT * FROM indent WHERE 1=1
+        SELECT * FROM t_indent WHERE 1=1
         <if test="indent!=null">
-            <if test="indent.incode!=null and indent.incode!='' ">
-                and incode =#{indent.incode}
+            <if test="indent.indentcode!=null and indent.indentcode!='' ">
+                and indentcode =#{indent.indentcode}
             </if>
             <if test="indent.username!=null and indent.username!='' ">
                 and username =#{indent.username}
@@ -167,8 +181,8 @@
  insert into t_miaosha
 		values(#{id},#{begintime},#{count},#{endtime},#{goodid},#{goodimage},#{mprice},#{status})
     </insert>
-    <update id="updatekucun" parameterType="Integer">
-        UPDATE  t_shop SET kucun =kucun-#{b} WHERE  id=#{a}
+    <update id="updatekucun22" parameterType="Integer">
+        UPDATE  t_shop SET kucun=kucun -#{b} WHERE  id=#{a}
     </update>
     <select id="selectMiao" resultMap="miao">
 
@@ -177,5 +191,26 @@
     <update id="updateId" parameterType="Integer">
         UPDATE t_miaosha SET status=1 WHERE id=#{a}
     </update>
-
+<update id="updateKucun" parameterType="Integer">
+    UPDATE t_miaosha SET  count =count -1 WHERE  id=#{id }
+</update>
+    <select id="querygoodsbyid" parameterType="Integer" resultType="com.jk.bean.lx.Goods">
+        SELECT * FROM  t_shop where id=#{gid}
+    </select>
+<select id="selectName" resultType="String">
+    SELECT loginname FROM t_user WHERE userid=#{uid}
+</select>
+    <insert id="addljgm">
+        INSERT INTO t_indent (allprice,createtime,indentcode,goodscount,goodsid,status,userid,username)VALUES (#{goods.price},#{indent.createtime},#{indent.indentcode},#{goods.count},#{goods.id},#{indent.status},#{uid},#{uname})
+    </insert>
+    <insert id="addGou">
+    INSERT INTO t_sonbuy (goodsname,goodsprice,goodscount,goodsxiaoji,carid,goodsid,goodsimage,userid,status) VALUES (#{good.sname},#{good.price},#{good.count},#{gou.goodsxiaoji},#{gou.carid},#{good.id},#{good.image},#{uid},#{gou.status})
+    </insert>
+   <select id="selectGG" resultMap="gou">
+        SELECT t1.goodsname,t1.goodsprice,t1.goodscount,t1.goodsxiaoji,t1.goodsimage,t1.goodsid,t3.kucun
+         FROM t_sonbuy t1 LEFT  JOIN t_user t2 ON t1.userid=t2.userid LEFT JOIN t_shop t3 ON t1.goodsid = t3.id where t1.userid=#{id} AND t1.status=2
+    </select>
+    <update id="updateGwc" parameterType="Integer">
+        UPDATE t_sonbuy SET status =1.0 WHERE goodsid =#{id}
+    </update>
 </mapper>

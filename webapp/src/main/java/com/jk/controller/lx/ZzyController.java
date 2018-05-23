@@ -4,18 +4,20 @@ import com.alibaba.fastjson.JSON;
 import com.jk.bean.ht.Label;
 import com.jk.bean.lx.*;
 import com.jk.bean.mn.News;
+import com.jk.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.jk.service.ZzyService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("zzyController")
@@ -165,10 +167,12 @@ public class ZzyController {
 
     }
   @RequestMapping("/selectxiang")
-    public ModelAndView selectxiang(Integer id){
+    public ModelAndView selectxiang(Integer id,HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
+       User user =(User)request.getSession().getAttribute("user");
      Goods goods =   zzyService.selectxiang(id);
      mav.addObject("goods" ,goods);
+      mav.addObject("user" ,user);
      mav.setViewName("/WEB-INF/zzy/xiangqing");
            return  mav;
 
@@ -252,6 +256,67 @@ public class ZzyController {
     public String toIndex(){
         return "/WEB-INF/zzy/index";
 }
+    @RequestMapping("/miaoshaGoods")
+   @ResponseBody
+   public String miaoshaGoods( HttpServletRequest request,Miao miao ,HttpServletResponse response,Integer id) {
+        Object object = request.getSession().getAttribute("user");
+
+        if (object != null) {
+            zzyService.updateKucun(id);
+            return "1";
+
+        } else{
 
 
+            return "2";
+        }
+
+
+
+    }
+    //生成订单
+    @RequestMapping("/addljgm")
+    @ResponseBody
+    public void addljgm(Indent indent,Integer gid,Integer uid){
+        Goods goods = zzyService.querygoodsbyid(gid);
+
+        indent.setCreatetime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString());
+        indent.setStatus(2);
+
+
+        indent.setIndentcode(UUID.randomUUID().toString().replaceAll("-",""));
+
+        goods.setCount(1);
+        zzyService.addljgm(indent,goods,uid);
+
+}
+     @RequestMapping("/addGou")
+    @ResponseBody
+    public void addGou(Integer gid ,Integer uid,Gou gou){
+         Goods good = zzyService.querygoodsbyid(gid);
+           gou.setCarid(UUID.randomUUID().toString().replaceAll("-",""));
+           good.setCount(1);
+           gou.setStatus(2);
+           gou.setGoodsxiaoji(good.getCount()*good.getPrice());
+         zzyService.addGou(uid,good,gou);
+
+
+     }
+     @RequestMapping("/selectGwc")
+    public String selectGwc(Integer id, Model model){
+        model.addAttribute("id",id);
+         System.out.println(id);
+        return "/WEB-INF/zzy/gwc";
+     }
+     @RequestMapping("/selectGG")
+    @ResponseBody
+    public  List selectGG(Integer id){
+         System.out.println(id);
+        return zzyService.selectGG(id);
+     }
+     @RequestMapping("/updateGwc")
+    @ResponseBody
+    public void deletGwc(Integer id){
+         zzyService.updateGwc(id);
+     }
 }

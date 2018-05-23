@@ -2,6 +2,7 @@ package com.jk.service.impl;
 
 import com.jk.bean.ht.Label;
 import com.jk.bean.lx.*;
+import com.jk.pojo.User;
 import com.jk.bean.mn.News;
 import com.jk.dao.LabelDao;
 import com.jk.dao.ZzyDao;
@@ -151,15 +152,47 @@ public class ZzyServiceImpl implements ZzyService {
         }
         zzyDao.deleteAll();
         zzyDao.addMiao(miao);
-        Integer a =miao.getId();
+        Integer a =miao.getGoodid();
         Integer b =miao.getCount();
           zzyDao.updateId(a);
-        zzyDao.updatekucun(a,b);
+        zzyDao.updatekucun22(a,b);
     }
 
     @Override
     public List<Miao> selectMiao() {
         return zzyDao.selectMiao();
+    }
+
+    @Override
+    public void updateKucun(Integer id) {
+        zzyDao.updateKucun(id);
+    }
+
+    @Override
+    public Goods querygoodsbyid(Integer gid) {
+        return zzyDao.querygoodsbyid(gid);
+    }
+
+
+    @Override
+    public void addljgm(Indent indent,Goods goods, Integer uid) {
+     String uname = zzyDao.selectName(uid);
+        zzyDao.addljgm(indent,goods,uid,uname);
+    }
+
+    @Override
+    public void addGou(Integer uid, Goods good, Gou gou) {
+        zzyDao.addGou(uid,good,gou);
+    }
+
+    @Override
+    public List selectGG(Integer id) {
+        return zzyDao.selectGG(id);
+    }
+
+    @Override
+    public void updateGwc(Integer id) {
+        zzyDao.updateGwc(id);
     }
 
 

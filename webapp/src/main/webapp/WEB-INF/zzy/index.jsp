@@ -32,8 +32,8 @@
 		    </div>   
 		</div>  
    	</div>   
-   	<div data-options="region:'center',border:false" style="padding:5px;background:#eee;">
-   		<div id="tables" class="easyui-tabs" data-options="fit:true" style="width:500px;height:250px;">   
+   	<div data-options="region:'center',border:false" style="padding:5px;background:#eee;" >
+   		<div id="tables" class="easyui-tabs" data-options="fit:true">
 		    <div title="" style="padding:20px;display:none;">   
 		        	欢迎来到后台管理系统
 		    </div>   
@@ -42,7 +42,6 @@
 	<script type="text/javascript">
 		//在浏览器控制台打印信息
 		//console.info(node)
-		//var id=${sessionScope.user.id}
 			//alert(id)
 		$('#tree').tree({
 		    url:"<%=request.getContextPath()%>/UserController/getTree",
