@@ -84,7 +84,9 @@ public interface ZzyDao {
 
     void addIndentList(@Param("list") List<Indent> list);
 
- //   void deletegwc(Integer sss[i]);
+    void deletegwc(@Param("sss") Integer[] sss, @Param("userid")Integer userid);
+
+    //  void deletegwc(Integer sss[i]);
 
 
 }

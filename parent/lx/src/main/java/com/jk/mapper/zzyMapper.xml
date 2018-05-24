@@ -8,6 +8,7 @@
         <result column="allprice" property="allprice"></result>
         <result column="createtime" property="createtime"></result>
         <result column="userid" property="userid"></result>
+        <result column="sname" property="sname"></result>
         <result column="goodsid" property="goodsid"></result>
         <result column="username" property="username"></result>
         <result column="status" property="status"></result>
@@ -82,24 +83,24 @@
 
 
     <select id="getDingWhere" resultMap="indent">
-        SELECT * FROM indent WHERE 1=1
+        SELECT t1.*,t2.sname FROM t_indent t1 LEFT JOIN t_shop t2 ON  t1.goodsid = t2.id  WHERE 1=1
         <if test="indentcode!=null and indentcode!=''">
-            and indentcode =#{indentcode}
+            and t1.indentcode =#{indentcode}
 
         </if>
         <if test="username!=null and username!=''">
-            and username like '%${username}%'
+            and t1.username like '%${username}%'
 
         </if>
     </select>
     <select id="getDingPage" resultMap="indent">
-        SELECT * FROM t_indent WHERE 1=1
+        SELECT t1.*,t2.sname FROM t_indent t1 LEFT JOIN t_shop t2 ON  t1.goodsid = t2.id WHERE 1=1
         <if test="indent!=null">
             <if test="indent.indentcode!=null and indent.indentcode!='' ">
-                and indentcode =#{indent.indentcode}
+                and t1.indentcode =#{indent.indentcode}
             </if>
             <if test="indent.username!=null and indent.username!='' ">
-                and username =#{indent.username}
+                and t1.username =#{indent.username}
             </if>
         </if>
         limit #{begin},#{end}
@@ -209,7 +210,7 @@
     </insert>
    <select id="selectGG" resultMap="gou">
         SELECT t1.goodsname,t1.goodsprice,t1.goodscount,t1.goodsxiaoji,t1.goodsimage,t1.goodsid,t3.kucun,t1.id,t2.userid
-         FROM t_sonbuy t1 LEFT  JOIN t_user t2 ON t1.userid=t2.userid LEFT JOIN t_shop t3 ON t1.goodsid = t3.id where t1.userid=#{id} AND t1.status=2
+         FROM t_sonbuy t1 LEFT  JOIN t_user t2 ON t1.userid=t2.userid LEFT JOIN t_shop t3 ON t1.goodsid = t3.id where t1.userid=#{id}
     </select>
  <delete id="deleteGwc">
      DELETE FROM t_sonbuy WHERE id=#{id}
@@ -227,7 +228,11 @@ SELECT   * FROM  t_dizhi WHERE uid=#{id}
             #{indent.indentcode},#{indent.userid},#{indent.username},#{indent.did})
         </foreach>
     </insert>
-<delete id="deletegwc">
-    DELETE FROM t_sonbuy WHERE goodsid=#{goodsid} AND  userid=#{userid}
+   <delete id="deletegwc">
+    DELETE FROM t_sonbuy WHERE goodsid IN
+    <foreach collection="sss" item="so" open="(" separator="," close=")">
+    #{so}
+    </foreach>
+    AND userid=#{userid}
 </delete>
 </mapper>

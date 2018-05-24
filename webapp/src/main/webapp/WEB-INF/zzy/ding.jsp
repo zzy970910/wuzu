@@ -39,24 +39,34 @@
                 {field:'status',title:'订单状态',width:100,
                     formatter: function(value,row,index){
                         if (row.status==1){
-                            return "已发货";
-                        } else {
                             return "未发货";
+                        } else {
+                            return "已发货";
                         }
                     }
                 },
                 {field:'createtime',title:'创建时间',width:100},
-                {field:'goodsid',title:'商品id',width:100},
-                {field:'userid',title:'订单人ID',width:100},
+                {field:'sname',title:'商品名称',width:100},
+                //{field:'userid',title:'订单人ID',width:100},
                 {field:'goodscount',title:'商品数量',width:100},
                 {field:'username',title:'订单人用户名',width:100},
+                {field:'s',title:'操作',width:100,
+                    formatter: function(value,row,index) {
+                    if(row.status==1){
+                        return "<input type='button' class=\"easyui-linkbutton\"  value='发货' data-options=\"iconCls:'icon-redo',plain:true\"/>"
+                    }  else{
+
+
+                    }
+                    },
+                    }
 
             ]]  ,
 
             fitColumns:true,
             pagination:true,
             pageNumber:1,
-            pageSize:3,
+            pageSize:10,
             pageList:[3,6,10],
             loadMsg:"数据库加载中。。。。。。。。。。。。。。。。。。",
         });

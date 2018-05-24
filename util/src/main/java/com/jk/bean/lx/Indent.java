@@ -11,6 +11,15 @@ public class Indent {
     private Integer goodscount;
     private Integer status;
     private Integer did;
+    private String sname;
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
 
     public Integer getId() {
         return id;
