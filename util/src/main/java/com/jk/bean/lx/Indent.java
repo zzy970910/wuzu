@@ -8,8 +8,9 @@ public class Indent {
     private Integer goodsid;
     private Integer userid;
     private String username;
-    private String goodscount;
+    private Integer goodscount;
     private Integer status;
+    private Integer did;
 
     public Integer getId() {
         return id;
@@ -67,11 +68,11 @@ public class Indent {
         this.username = username;
     }
 
-    public String getGoodscount() {
+    public Integer getGoodscount() {
         return goodscount;
     }
 
-    public void setGoodscount(String goodscount) {
+    public void setGoodscount(Integer goodscount) {
         this.goodscount = goodscount;
     }
 
@@ -81,6 +82,14 @@ public class Indent {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
     }
 
     @Override
@@ -95,6 +104,7 @@ public class Indent {
                 ", username='" + username + '\'' +
                 ", goodscount='" + goodscount + '\'' +
                 ", status=" + status +
+                ", did=" + did +
                 '}';
     }
 }

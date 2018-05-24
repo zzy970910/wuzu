@@ -6,6 +6,8 @@ import com.jk.bean.ht.Label;
 import com.jk.bean.lx.*;
 import com.jk.bean.mn.News;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface ZzyService {
 
 
@@ -64,5 +66,9 @@ public interface ZzyService {
 
     List selectGG(Integer id);
 
-    void updateGwc(Integer id);
+    void deleteGwc(Integer id);
+
+    List<Dizhi> selectAdress(Integer id);
+
+    void addDing(Integer[] sss2, Integer[] sss, Integer id, HttpServletRequest request);
 }

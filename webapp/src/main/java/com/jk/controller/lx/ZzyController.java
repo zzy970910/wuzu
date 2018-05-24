@@ -5,12 +5,14 @@ import com.jk.bean.ht.Label;
 import com.jk.bean.lx.*;
 import com.jk.bean.mn.News;
 import com.jk.pojo.User;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.jk.service.ZzyService;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -126,10 +128,17 @@ public class ZzyController {
         return zzyService.querytejia();
     }
 
+    @RequestMapping("/selectFenid11")
+    public ModelAndView selectFenid11(Integer id) {
+        ModelAndView mav = new ModelAndView("/WEB-INF/zzy/fen");
+      //list = zzyService.selectFenid(id);
+        mav.addObject("id",id);
+        return  mav;
+    }
     @RequestMapping("/selectFenid")
     @ResponseBody
-    public List<Goods> selectFenid(Integer id) {
-        return zzyService.selectFenid(id);
+    public List<Goods> selectFenid(Integer id){
+      return zzyService.selectFenid(id);
     }
 
     @RequestMapping("/querybianqian")
@@ -296,7 +305,7 @@ public class ZzyController {
          Goods good = zzyService.querygoodsbyid(gid);
            gou.setCarid(UUID.randomUUID().toString().replaceAll("-",""));
            good.setCount(1);
-           gou.setStatus(2);
+           gou.setStatus(1);
            gou.setGoodsxiaoji(good.getCount()*good.getPrice());
          zzyService.addGou(uid,good,gou);
 
@@ -314,9 +323,32 @@ public class ZzyController {
          System.out.println(id);
         return zzyService.selectGG(id);
      }
-     @RequestMapping("/updateGwc")
+    @RequestMapping("/deleteGwc")
     @ResponseBody
-    public void deletGwc(Integer id){
-         zzyService.updateGwc(id);
+    public String deleteGwc(Integer id){
+         zzyService.deleteGwc(id);
+         return "1";
      }
+     //填写收货地址
+    @RequestMapping("/addAdress")
+    public ModelAndView addAdress(Integer id){
+        ModelAndView mav = new ModelAndView("/WEB-INF/zzy/Cardizhi");
+        mav.addObject("id",id);
+        return mav;
+    }
+    @RequestMapping("/selectAdress")
+    @ResponseBody
+    public String selectAdress(Integer id){
+        return JSON.toJSONString(zzyService.selectAdress(id));
+    }
+
+   @RequestMapping("/addDing")
+    @ResponseBody
+    public String addDing(@RequestParam("sss2[]") Integer[] sss2, @RequestParam("sss[]") Integer[] sss, Integer id,HttpServletRequest request){
+
+            zzyService.addDing(sss2,sss,id,request);
+        return "1";
+   }
+
+
 }

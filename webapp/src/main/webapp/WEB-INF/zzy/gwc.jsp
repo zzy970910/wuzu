@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <title>Title</title>
 </head>
@@ -17,15 +18,15 @@
 
 
 
-<link type="text/css" rel="stylesheet" href="styles/index.css" />
-<script type="text/javascript" src="js/index.js"></script>
+<link type="text/css" rel="stylesheet" href="/styles/index.css" />
+<script type="text/javascript" src="/js/index.js"></script>
 <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" />
 <link href="<%=request.getContextPath() %>/assets/lib/bootstrap/css/bootstrap.css"
       rel="stylesheet" />
-<script src="assets/lib/bootstrap/js/bootstrap.js"></script>
-<%--<link rel="stylesheet" href="js/boot/bootstrap-dialog/dist/css/bootstrap-dialog.css" >
-<script type="text/javascript" src="js/boot/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
-<script src="assets/lib/bootstrap/js/bootstrap.js"></script>&ndash;%&gt;&ndash;%&gt;--%>
+<script src="/assets/lib/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/js/boot/bootstrap-dialog/dist/css/bootstrap-dialog.css" >
+<script type="text/javascript" src="/js/boot/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+<script src="/assets/lib/bootstrap/js/bootstrap.js"></script>
 <script src="/assets/lib/jquery/jquery-1.11.0.js"></script>
 <script src="/assets/lib/bootstrap/js/bootstrap.js"></script>
 
@@ -130,7 +131,7 @@
         <div class="pull-right">
             <button type="button"  onclick="shuaxina()" class="btn btn-warning btn-lg mr20">刷新</button>
             <button type="button"  onclick="gobacktobuy()" class="btn btn-addcart btn-lg mr20">继续购物</button>
-            <button type="button" onclick="buyallgouwu()"  class="btn btn-danger btn-lg mr20">去结算</button><br><br>
+            <button type="button" onclick="buyallgouwu(${user.userid})"  class="btn btn-danger btn-lg mr20">去结算</button><br><br>
         </div>
     </div>
     <!-- 购物车结束 -->
@@ -291,7 +292,7 @@
                 var xiaojidounle="";
 
 
-                var str= "<tr><td width='5%' class='tr-title'></td><td width='45%' class='tr-title'>商品名称</td><td width='12%' class='tr-title'>金额</td><td width='11%' class='tr-title'>优惠</td><td width='12%' class='tr-title'>数量</td><td width='8%' class='tr-title'>操作</td></tr>";
+                var str= "<tr><td width='5%' class='tr-title'><input type='checkbox' onclick='quanxuan(this)'/></td><td width='45%' class='tr-title'>商品名称</td><td width='12%' class='tr-title'>金额</td><td width='11%' class='tr-title'>优惠</td><td width='12%' class='tr-title'>数量</td><td width='8%' class='tr-title'>操作</td></tr>";
                 if(result!="null"&&result!=null){
                    // var daleideid=result[0].daid;
                     //$("#daleiidyk").val(daleideid);
@@ -306,25 +307,25 @@
                         count1+=result[i].goodsxiaoji;
 
                         str+="<tr>"+
-                            "<td width='5%' class='tr-list'>"+
+                            "<td width='5%' class='tr-list'><input type='checkbox' value='"+result[i].goodsid+"'  name='box'>"+
                             "</td>"+
                             "<td width='45%' class='tr-list'>"+
                             "<img class='pull-left'  src='"+result[i].goodsimage+"' />"+
                             "<div class='summary blue-font'><a href='#'>"+result[i].goodsname+"</a></div>"+
                             "</td>"+
-                            "<td width='7%' class='tr-list'><b id='"+result[i].goodsid+"'>"+result[i].goodsprice+"</b></td>"+
+                            "<td width='7%' class='tr-list'><b name='showallmoney' id='"+result[i].goodsid+"'>"+result[i].goodsprice+"</b></td>"+
 
                             "<td width='10%' class='tr-list'><b class='orange-font'>减￥0</b></td>"+
                             //"<td width='11%' class='tr-list'>"+result[i].goodscount+"</td>"+
                             "<td width='12%' class='tr-list'>"+
 
                             "<span class='ui-spinner'>"+
-                            "<input type='text' class='"+result[i].goodsid+"' value='"+result[i].goodscount+"' aria-valuenow='0' autocomplete='off'>"+
+                            "<input type='text' class='"+result[i].goodsid+"' name='showcount11' value='"+result[i].goodscount+"' aria-valuenow='0' autocomplete='off'>"+
                             "<a class='ui-spinner-button ui-spinner-up' onclick='updatacountup("+result[i].goodsid+","+result[i].goodscount+","+result[i].goodsprice+")'><span>▲</span></a>"+
                             "<a class='ui-spinner-button ui-spinner-down' onclick='updatacountdown("+result[i].goodsid+","+result[i].goodscount+","+result[i].goodsprice+")'><span >▼</span></a>"+
                             "</span>"+
                             "</td>"+
-                            "<td width='5%' class='tr-list bule-font'><a href='#' onclick='deletegoodsbyid("+result[i].goodsid+")'><font color='red'>删除</font></a></td>"+
+                            "<td width='5%' class='tr-list bule-font'><a href='#' onclick='deletegoodsbyid("+result[i].id+")'><font color='red'>删除</font></a></td>"+
                             "</tr>"
 
 
@@ -347,13 +348,19 @@
 </script>
 <script>
     function deletegoodsbyid(id) {
+        alert(id)
         $.ajax({
-            url:'<%=request.getContextPath()%>/zzyController/updateGwc.do?id='+id,
+            url:'<%=request.getContextPath()%>/zzyController/deleteGwc.do?id='+id,
+
             //data:{"id":aa,"gid":gid},
             type:"post",
-            dataType:"json",
+            dataType:"text",
             success:function(reuslt){
-                location.reload();
+                if(reuslt == "1"){
+                    alert("成功")
+                    location.reload();
+                }
+
             },error:function(){
                 alert('警告','报错');
             }
@@ -366,15 +373,117 @@
 
         $("#"+gid+"").html(price * ((parseInt($("."+gid+"").val()) + 1)))
         $("."+gid+"").val(parseInt($("."+gid+"").val()) + 1)
-
+        var a = 0;
+        $("[name='showcount11']").each(function(){
+            a+=parseInt($(this).val())
+        })
+        $("#showcount11").html(a)
+        var b = 0;
+        $("[name='showallmoney']").each(function(){
+            b+=parseInt($(this).html())
+        })
+        $("#showallmoney").html(b)
     }
     function updatacountdown(gid,gcount,price) {
         if(parseInt($("."+gid+"").val()) > 1){
             $("#"+gid+"").html(price * ((parseInt($("."+gid+"").val()) - 1)))
             $("."+gid+"").val(parseInt($("."+gid+"").val()) - 1)
+            var a = 0;
+            $("[name='showcount11']").each(function(){
+                a+=parseInt($(this).val())
+            })
+            $("#showcount11").html(a)
+            var b = 0;
+            $("[name='showallmoney']").each(function(){
+                b+=parseInt($(this).html())
+            })
+            $("#showallmoney").html(b)
         }
 
 
     }
+    function quanxuan(obj) {
+        var aa = obj.checked
+        $("[name='box']").each(function () {
+            this.checked = aa
+        })
+    }
+
+    function buyallgouwu(id) {
+       // alert(id)
+        /*
+        * 购物车购买物品
+        * */
+        var arr = $("[name='box']:checked")
+        if(arr.length != 0){
+            var str = '';
+            arr.each(function(){
+                str += ','+$(this).val()
+            })
+            str = str.substr(1)
+            var sss = str.split(",")
+            var sss2 = []
+            for(var b = 0;b<sss.length;b++){
+                sss2.push($("."+sss[b]).val())
+            }
+            BootstrapDialog.show({
+                title:"填写收货地址",
+
+
+                cssClass: 'login-dialog',
+
+                message: $('<div></div>').load('<%=request.getContextPath()%>/zzyController/addAdress.do?id='+id),
+                size: BootstrapDialog.SIZE_WIDE,
+
+                buttons: [{
+
+                    label: '关闭',
+                    action: function(dialog) {
+                        //更改弹框标题
+                        BootstrapDialog.closeAll();
+                        dialog.setSize(BootstrapDialog.SIZE_NORMAL);
+
+                    },
+                    label : '保存',
+                    action : function(dialogItself) {
+                       // var formData = new FormData(document.getElementById("fff"));
+                        $.ajax({
+
+                            url: "<%=request.getContextPath()%>/zzyController/addDing.do",
+                            type: "post",
+                            data: {"sss2":sss2,"sss":sss,"id":$("[name='rad']:checked").val()},
+                            dataType: "text",
+                            async: false,
+                            success: function (data) {
+                                if (data == "1") {
+                                    alert("成功");
+                                    BootstrapDialog.closeAll();
+                                    $("#table").bootstrapTable("refresh", {pageNumber: 1});
+                                } else {
+                                    BootstrapDialog.closeAll();
+                                    $("#table").bootstrapTable("refresh", {pageNumber: 1});
+
+                                    alert("成功")
+                                }
+                            },
+                            error:function () {
+                                alert("chucuo")
+                                BootstrapDialog.closeAll();
+
+                            }
+
+                        })
+                    }
+                }]
+            });
+        }else{
+            alert("必须选中一项")
+        }
+
+
+
+    }
+
+
 </script>
 </html>

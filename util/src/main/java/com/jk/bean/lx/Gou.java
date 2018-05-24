@@ -1,7 +1,7 @@
 package com.jk.bean.lx;
 
 public class Gou {
-    private Indent id;
+    private Integer id;
     private String  carid;
     private Integer goodscount;
     private String goodsname;
@@ -12,11 +12,11 @@ public class Gou {
     private Integer status;
     private Integer userid;
 
-    public Indent getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Indent id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

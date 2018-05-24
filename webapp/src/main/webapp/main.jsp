@@ -682,19 +682,7 @@ ${user.userid}
     //查询分类
     function ckspxl(id){
 
-        $.ajax({
-            url:"<%=request.getContextPath()%>/zzyController/selectFenid.do?id="+id,
-            type:"post",
-            datatype:"json",
-            async:false,
-            success:function(pager){
-
-                selectshangpinquanbu(pager)
-            },
-            error:function(){
-                alert("查询出错！！！");
-            }
-        })
+        location.href="<%=request.getContextPath()%>/zzyController/selectFenid11.do?id="+id;
 
     }
     function ckrp() {

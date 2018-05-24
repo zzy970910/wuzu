@@ -78,5 +78,13 @@ public interface ZzyDao {
 
     List selectGG(Integer id);
 
-    void updateGwc(Integer id);
+    void deleteGwc(Integer id);
+
+    List<Dizhi> selectAdress(Integer id);
+
+    void addIndentList(@Param("list") List<Indent> list);
+
+ //   void deletegwc(Integer sss[i]);
+
+
 }

@@ -7,15 +7,19 @@ import com.jk.bean.mn.News;
 import com.jk.dao.LabelDao;
 import com.jk.dao.ZzyDao;
 import com.jk.service.ZzyService;
-import org.joda.time.DateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ZzyServiceImpl implements ZzyService {
@@ -191,8 +195,39 @@ public class ZzyServiceImpl implements ZzyService {
     }
 
     @Override
-    public void updateGwc(Integer id) {
-        zzyDao.updateGwc(id);
+    public void deleteGwc(Integer id) {
+        zzyDao.deleteGwc(id);
+    }
+
+    @Override
+    public List<Dizhi> selectAdress(Integer id) {
+        return zzyDao.selectAdress(id);
+    }
+
+    @Override
+    public void addDing(Integer[] sss2, Integer[] sss, Integer id,HttpServletRequest request) {
+        List<Indent> list = new ArrayList<Indent>();
+        User user =(User) request.getSession().getAttribute("user");
+        Date data = new Date();
+        for (int i = 0;i<sss.length;i++){
+
+            Goods goods = zzyDao.querygoodsbyid(sss[i]);
+            Indent ind = new Indent();
+            ind.setIndentcode(UUID.randomUUID().toString().replaceAll("-",""));
+            ind.setAllprice(goods.getPrice() * sss2[i]);
+            ind.setCreatetime(new SimpleDateFormat("yyyy-MM-dd").format(data).toString());
+            ind.setGoodscount(sss2[i]);
+            ind.setGoodsid(goods.getId());
+            ind.setUserid(Integer.valueOf(user.getUserid()));
+            ind.setUsername(user.getLoginname());
+            ind.setDid(id);
+            list.add(ind);
+        }
+        //购物车订单购买以后
+        zzyDao.addIndentList(list);
+        //删除购物车购买的商品
+       //Indent indent =new Indent();
+       //zzyDao.deletegwc(sss[i]);
     }
 
 
