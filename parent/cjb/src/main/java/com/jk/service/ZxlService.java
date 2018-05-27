@@ -6,4 +6,6 @@ public interface ZxlService {
     String toShowlu(String un, String pwd);
 
     String addShow(String unss, String pwdss, String dianhua, String zhenname, String xuanz, String shengfenz);
+
+    String adduserssv(String a);
 }

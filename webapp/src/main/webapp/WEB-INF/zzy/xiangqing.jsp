@@ -141,7 +141,7 @@
                 <div class="meta-magnifier pull-left" style="width: 50px">
                     <div class="con-FangDa" id="fangdajing" style="width: 200px;height:300px">
                         <div class="con-fangDaIMg" style="width: 200px;height:300px">
-                            <img  src="${goods.image}" style="width: 200px"/>
+                            <img  src="${goods.image}" style="width: 400px"/>
                             <!-- 滑块-->
                            <div class="magnifyingBegin" style="width: 100px;height: 100px;"></div>
                             <!-- 放大镜显示的图片 -->

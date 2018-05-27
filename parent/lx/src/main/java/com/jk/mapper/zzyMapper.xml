@@ -12,6 +12,10 @@
         <result column="goodsid" property="goodsid"></result>
         <result column="username" property="username"></result>
         <result column="status" property="status"></result>
+<!--
+        <result column="loginname" property="loginname"></result>
+-->
+
 
     </resultMap>
     <resultMap type="com.jk.bean.lx.Da" id="da">
@@ -51,6 +55,7 @@
         <result column="pasttime" property="pasttime"></result>
         <result column="image" property="image"></result>
         <result column="mid" property="mid"></result>
+        <result column="zhekou" property="zhekou"></result>
 
     </resultMap>
     <resultMap id="biao" type="com.jk.bean.ht.Label" >
@@ -165,7 +170,7 @@
     UPDATE t_shop SET rid=1 WHERE id=#{reid}
 </update>
     <update id="updatetejia" parameterType="Integer">
-        UPDATE t_shop SET tid=1 WHERE id=#{id}
+        UPDATE t_shop SET tid=1 AND zhekou = zhekou* 0.5 WHERE id=#{id}
     </update>
     <select id="selectxiang" parameterType="Integer" resultType="com.jk.bean.lx.Goods">
         SELECT * FROM t_shop WHERE id=#{id}
@@ -235,4 +240,14 @@ SELECT   * FROM  t_dizhi WHERE uid=#{id}
     </foreach>
     AND userid=#{userid}
 </delete>
+    <update id="updatekucun">
+        UPDATE t_shop SET kucun = (kucun-
+            #{sss})
+
+        WHERE id=#{sss2}
+    </update>
+    <select id="selectindent" resultType="com.jk.bean.lx.Indent">
+   SELECT t1.indentcode,t2.sname,t1.goodscount,t1.allprice,t1.createtime,concat(t3.sheng,t3.shi,t3.xian) sheng,t4.loginname,t1.status FROM t_indent t1 LEFT JOIN t_shop t2  on t1.goodsid=t2.id LEFT JOIN t_dizhi t3 ON t1.did=t3.id LEFT JOIN t_user t4 ON t1.userid=t4.userid
+        WHERE t1.userid=#{id}
+    </select>
 </mapper>

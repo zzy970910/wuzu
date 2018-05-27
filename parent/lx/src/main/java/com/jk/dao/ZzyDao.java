@@ -86,6 +86,11 @@ public interface ZzyDao {
 
     void deletegwc(@Param("sss") Integer[] sss, @Param("userid")Integer userid);
 
+    void updatekucun(@Param("sss2") Integer sss2, @Param("sss") Integer sss);
+
+    List selectindent(Integer id);
+
+
     //  void deletegwc(Integer sss[i]);
 
 

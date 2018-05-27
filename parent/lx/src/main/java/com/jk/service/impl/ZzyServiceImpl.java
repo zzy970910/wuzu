@@ -227,7 +227,15 @@ public class ZzyServiceImpl implements ZzyService {
         zzyDao.addIndentList(list);
         //删除购物车购买的商品
        //Indent indent =new Indent();
+        for (int i = 0;i<sss.length;i++){
+            zzyDao.updatekucun(sss[i],sss2[i]);
+        }
        zzyDao.deletegwc(sss,Integer.valueOf(user.getUserid()));
+    }
+
+    @Override
+    public List selectindent(Integer id) {
+        return zzyDao.selectindent(id);
     }
 
 

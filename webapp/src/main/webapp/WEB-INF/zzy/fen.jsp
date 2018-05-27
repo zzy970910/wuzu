@@ -120,8 +120,9 @@
         </ul>
     </div>
 </div>
-<div id="zzy" ></div>
-
+<div>
+<div id="zzy" style="margin-left: 100px" ></div>
+</div>
 <script>
 $(function(){
     $.ajax({
@@ -155,6 +156,10 @@ $(function(){
         }
         $("#zzy").html(tr);
     }
+function chakanxx(id) {
+    alert(122)
+    location.href = "<%=request.getContextPath()%>/zzyController/selectxiang.do?id=" + id;
+}
 </script>
 </body>
 </html>

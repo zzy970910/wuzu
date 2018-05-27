@@ -71,4 +71,6 @@ public interface ZzyService {
     List<Dizhi> selectAdress(Integer id);
 
     void addDing(Integer[] sss2, Integer[] sss, Integer id, HttpServletRequest request);
+
+    List selectindent(Integer id);
 }

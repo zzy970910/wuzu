@@ -343,6 +343,28 @@
                 alert('警告','报错');
             }
         })
+        function cha(){
+
+                $.ajax({
+                    url:"<%=request.getContextPath()%>/zzyController/selectdaleichashangpin.action",
+                    data:{"daid":ppyk},
+                    type:"post",
+                    datatype:"json",
+                    async:false,
+                    success:function(pager){
+                        var tr="";
+                        var arr=eval("("+pager+")")
+
+                        for (var i = 0; i < arr.length; i++) {
+                            tr+="<div style='float:left' ><img src='"+arr[i].image+"'  width='150px' height='150px' title='点击查看详细信息' onclick='chakanxx1("+arr[i].id+",\""+arr[i].sname+"\")' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br><span><font size='1'>"+arr[i].sname+"</font></span><br><span><font size='1'>价格："+arr[i].price+"￥ </font></span></div>"
+                        }
+                        $("#tuijiandeshangpindalei").html(tr);
+                    },
+                    error:function(){
+                        alert("查询出错！！！")
+                    }
+                })
+            }
     })
 
 </script>
@@ -432,7 +454,7 @@
 
                 cssClass: 'login-dialog',
 
-                message: $('<div></div>').load('<%=request.getContextPath()%>/zzyController/addAdress.do?id='+id),
+                message: $('<div style="width: 100px"></div>').load('<%=request.getContextPath()%>/zzyController/addAdress.do?id='+id),
                 size: BootstrapDialog.SIZE_WIDE,
 
                 buttons: [{
@@ -458,7 +480,8 @@
                                 if (data == "1") {
                                     alert("成功");
                                     BootstrapDialog.closeAll();
-                                    $("#table").bootstrapTable("refresh", {pageNumber: 1});
+                                    location.reload();
+                                //    $("#table").bootstrapTable("refresh", {pageNumber: 1});
                                 } else {
                                     BootstrapDialog.closeAll();
                                     $("#table").bootstrapTable("refresh", {pageNumber: 1});

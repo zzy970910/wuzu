@@ -177,6 +177,7 @@
 <script>
     function tejia(){
         var id=$("#zzy1").datagrid("getSelections");
+        alert("成功设为特价")
         //alert(id[0].id)
         $.ajax({
             url:"<%=request.getContextPath()%>/zzyController/updatetejia.do",

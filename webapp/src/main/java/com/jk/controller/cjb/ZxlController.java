@@ -51,4 +51,16 @@ public class ZxlController {
         return  fang;
 
     }
+    //手机号
+    @RequestMapping(value = "/adduserssv",produces="text/html;charset=UTF-8")
+    @ResponseBody
+
+    public String adduserssv(String a){
+
+
+        String  fang = zxlService.adduserssv(a);
+
+        return  fang;
+
+    }
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.jk.dao.EhartsDao">
 
     <select id="quertEcharts" resultType="com.jk.bean.lx.Indent">
-        SELECT DATE_FORMAT(createtime, '%d') createtime,SUM(allprice) stauts FROM `t_indent` WHERE DATE_FORMAT(SYSDATE(), '%m') = DATE_FORMAT(createtime, '%m') GROUP BY createtime ORDER BY DATE_FORMAT(createtime, '%Y-%m-%d')
+        SELECT DATE_FORMAT(createtime, '%d') createtime,SUM(allprice) status FROM `t_indent` WHERE DATE_FORMAT(SYSDATE(), '%m') = DATE_FORMAT(createtime, '%m') GROUP BY createtime ORDER BY DATE_FORMAT(createtime, '%Y-%m-%d')
     </select>
 
 

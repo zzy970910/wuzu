@@ -23,11 +23,11 @@
 <%--<link rel="stylesheet" href="<%=path %>/js/boot/bootStrap-addTabs/bootstrap.addtabs.css" >
 <script type="text/javascript" src="<%=path %>/js/boot/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>--%>
 <!-- table -->
-<%--<link rel="stylesheet" href="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.css" >
-<script type="text/javascript" src="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.js"></script>--%>
-<%--
+<link rel="stylesheet" href="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.css" >
+<%--<script type="text/javascript" src="<%=path %>/js/boot/bootstrap-table/dist/bootstrap-table.js"></script>--%>
+
 <script type="text/javascript" src="<%=path %>/js/boot/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
---%>
+
 
     <link href="../../image/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     <link type="text/css" rel="stylesheet" href="../../styles/index.css" />

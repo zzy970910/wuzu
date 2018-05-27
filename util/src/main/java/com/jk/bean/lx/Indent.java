@@ -12,6 +12,8 @@ public class Indent {
     private Integer status;
     private Integer did;
     private String sname;
+    private  String loginname;
+    private String sheng;
 
     public String getSname() {
         return sname;
@@ -101,6 +103,22 @@ public class Indent {
         this.did = did;
     }
 
+    public String getLoginname() {
+        return loginname;
+    }
+
+    public void setLoginname(String loginname) {
+        this.loginname = loginname;
+    }
+
+    public String getSheng() {
+        return sheng;
+    }
+
+    public void setSheng(String sheng) {
+        this.sheng = sheng;
+    }
+
     @Override
     public String toString() {
         return "Indent{" +
@@ -111,9 +129,12 @@ public class Indent {
                 ", goodsid=" + goodsid +
                 ", userid=" + userid +
                 ", username='" + username + '\'' +
-                ", goodscount='" + goodscount + '\'' +
+                ", goodscount=" + goodscount +
                 ", status=" + status +
                 ", did=" + did +
+                ", sname='" + sname + '\'' +
+                ", loginname='" + loginname + '\'' +
+                ", sheng='" + sheng + '\'' +
                 '}';
     }
 }

@@ -69,7 +69,9 @@ dialog.js"></script>--%>
 </head>
 
 <body>
-${user.userid}
+${user.loginname}
+<input type="hidden" id="yid" value="${user.userid }">
+
 <div class="mgj_rightbar">
     <div class="mgj-my-cart">
         <a class="nofollow" href="javascript:gwc(${user.userid});">
@@ -78,23 +80,30 @@ ${user.userid}
         </a>
     </div>
     <div class="mgj-my-coupon">
-        <a class="nofollow" href="javascript:;">
+        <a class="nofollow" href="javascript:selectmydan(${user.userid});">
             <i class="s-icon"></i>
-            <div class="s-txt">优惠券</div>
+            <div class="s-txt">我的订单</div>
         </a>
     </div>
     <div class="mgj-my-wallet">
         <a class="nofollow" href="javascript:;">
             <i class="s-icon"></i>
-            <div class="s-txt">钱包</div>
+            <div class="s-txt">我的收藏</div>
         </a>
     </div>
     <div class="mgj-my-browserlog">
         <a class="nofollow" href="javascript:;">
             <i class="s-icon"></i>
-            <div class="s-txt">足迹</div>
+            <div class="s-txt">抽奖</div>
         </a>
     </div>
+    <div class="mgj-my-coupon">
+        <a class="nofollow" href="javascript:djqd();">
+            <i class="s-icon"></i>
+            <div class="s-txt">签到</div>
+        </a>
+    </div>
+
     <div class="sideBottom">
         <a class="nofollow" href="javascript:;">
             <i class="s-icon"></i>
@@ -127,8 +136,8 @@ ${user.userid}
                    </a>
                </li>--%>
             <%--<li class="dingdan"><a class="dd" href="#">我的订单</a></li>--%>
-            <li ><a class="dl" href="#">登录</a></li>
-            <li ><a class="zc" href="#">注册</a></li>
+            <li ><a class="dl" href="<%=request.getContextPath()%>/zengzhu.jsp">登录</a></li>
+            <li ><a class="zc" href="<%=request.getContextPath()%>/zengzhu.jsp">注册</a></li>
 
         </ul>
 
@@ -166,7 +175,7 @@ ${user.userid}
         </ul>
     </div>
 </div>
-<div class="banner" class="col-lg-2"  style="margin-left: 10px">
+<div class="banner" class="col-lg-2"  style="margin-left: 10px" >
     <%-- <div id="categories2" class="dropdown-menu">
          <ul class="ul">asdasdasdasdas</ul>
      </div>--%>
@@ -177,7 +186,7 @@ ${user.userid}
         <%-- <a class="navbar-brand dropdown-toggle" href="#">全部商品分类 <b
                  class="caret"></b></a>--%>
 
-        <div id="categories" class="dropdown-menu" style="height:540px;width:235px;background-color: #2aabd2">
+        <div id="categories" class="dropdown-menu" style="height: 500px" >
 
         </div>
 
@@ -186,10 +195,10 @@ ${user.userid}
 
 
     <!-- 右侧展示banner -->
-    <div class="right" class="col-lg-5">
+  <div class="right" class="col-lg-15">
         <!-- <img src="image/banner.gif" /> -->
 
-        <ul class="slide-show">
+        <ul class="slide-show" >
             <li><a href="#"><img src="image/banner4.jpg" alt="" /></a></li>
 
             <li><a href="#"><img src="image/banner1.jpg" alt=""/></a></li>
@@ -202,7 +211,7 @@ ${user.userid}
         <img class="banner-left" src="image/banner-left.png" />
         <img class="banner-right" src="image/banner-right.png" />
 
-        <ol class="p-box">
+        <ol class="p-box" >
             <li class="current"><img src="image/point40x40.png" width="20px" alt="" /></li>
             <li><img src="image/point40x40.png" width="20px" alt="" /></li>
             <li><img src="image/point40x40.png" width="20px" alt="" /></li>
@@ -212,7 +221,12 @@ ${user.userid}
         </ol>
 
 
-        <div>aaaaaaaa</div>
+
+    </div>
+    <div class="right1">
+
+
+        <img src="image/banner1.jpg" style="width: 254px;height: 530px;" />
 
     </div>
 
@@ -228,7 +242,9 @@ ${user.userid}
 
 
 </div>
-<br><br><br>
+
+
+
 <div class="panel panel-info">
     <div class="panel-heading">
         &nbsp;&nbsp;&nbsp;<font style="size:100px">推荐商品</font>
@@ -583,9 +599,9 @@ ${user.userid}
             success:function(xiaolei){
 
                 for (var int = 0; int < dalei.length; int++) {
-                    str+="<li class='sk' style='background-color:#b7d2ff'><a onclick='ckspdl("+dalei
+                    str+="<li class='sk' style='background-color:dodgerblue;'><a onclick='ckspdl("+dalei
                             [int].id+")'><i class='icon-main icon-2' ></i><font color='black' size='3'>"+dalei[int].dname
-                        +"</font></a><ul class='sub-item'  style='background-color: BEE9F0;width: 300px;height: 100px' >";
+                        +"</font></a><ul class='sub-item'  style='background-color: ;width: 200px;height: 50px' >";
                     for (var int2 = 0; int2 < xiaolei.length; int2++) {
                         if(xiaolei[int2].daid==dalei[int].id){
                             str+="<li><a onclick='ckspxl("+xiaolei[int2].id+")' class='icon-main icon-9'>"+xiaolei[int2].name+"</a></li>";
@@ -738,6 +754,23 @@ ${user.userid}
     function gwc(id) {
 
         location.href="<%=request.getContextPath()%>/zzyController/selectGwc.do?id="+id;
+    }
+    function selectmydan(id) {
+        alert(id)
+        location.href="<%=request.getContextPath()%>/zzyController/selectmydan.do?id="+id;
+
+    }
+    function djqd() {
+        var userid = $("#yid").val()
+        if(userid == null){
+            var msg = "亲,登录后才可以签到哦!!\n\n请确认！";
+            if (confirm(msg)==true){
+                location.href="<%=request.getContextPath()%>/zengzhu.jsp";
+                return true;
+            }
+        }else{
+            location.href="<%=request.getContextPath()%>/zzyController/qiandao.do?id="+userid;
+        }
     }
 </script>
 </body>

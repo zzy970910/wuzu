@@ -290,7 +290,7 @@ public class ZzyController {
         Goods goods = zzyService.querygoodsbyid(gid);
 
         indent.setCreatetime(new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString());
-        indent.setStatus(2);
+        indent.setStatus(1);
 
 
         indent.setIndentcode(UUID.randomUUID().toString().replaceAll("-",""));
@@ -349,6 +349,25 @@ public class ZzyController {
             zzyService.addDing(sss2,sss,id,request);
         return "1";
    }
+  //查询个人订单
+    @RequestMapping("/selectmydan")
+    public ModelAndView selectmydan(Integer id){
+        ModelAndView mav = new ModelAndView("/WEB-INF/zzy/dingdan");
+       mav.addObject("id",id);
+        return mav;
+    }
+    //查询个人订单
+    @RequestMapping("/selectindent")
+    @ResponseBody
+    public List selectindent(Integer id){
 
+        return zzyService.selectindent(id);
+    }
+    //跳转签到页面
+    @RequestMapping("/qiandao")
+    public String qiandao(Integer id,Model model){
+           model.addAttribute("id",id);
+        return "/WEB-INF/zzy/qiandao";
+    }
 
 }
